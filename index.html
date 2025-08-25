@@ -3,16 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EliteStep - Calzado Premium para Hombres</title>
+    <title>La Calle de Luna - Sistema de Devoluciones</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #2c3e50;
-            --secondary: #e67e22;
-            --accent: #3498db;
-            --light: #ecf0f1;
-            --dark: #2c3e50;
-            --success: #27ae60;
+            --primary: #6c5ce7;
+            --secondary: #fd79a8;
+            --accent: #74b9ff;
+            --dark: #2d3436;
+            --darker: #1e272e;
+            --light: #dfe6e9;
+            --success: #00b894;
+            --danger: #d63031;
+            --moon-glow: #f1f2f6;
+            --warning: #fdcb6e;
         }
         
         * {
@@ -23,27 +27,44 @@
         }
         
         body {
-            background-color: #f8f9fa;
-            color: #333;
+            background: linear-gradient(to bottom, #0c2461, #1e3799, #4a69bd);
+            color: var(--light);
             line-height: 1.6;
+            background-attachment: fixed;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 100px 100px, 150px 150px;
+            z-index: -1;
         }
         
         .container {
-            width: 100%;
+            width: 90%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
         }
         
         /* Header */
         header {
-            background-color: var(--primary);
-            color: white;
+            background: rgba(30, 39, 46, 0.9);
+            color: var(--light);
             padding: 15px 0;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
         }
         
         .header-content {
@@ -61,12 +82,25 @@
         
         .logo i {
             margin-right: 10px;
-            color: var(--secondary);
+            color: var(--moon-glow);
+            font-size: 2rem;
+            text-shadow: 0 0 10px var(--moon-glow);
+            animation: glow 2s infinite alternate;
+        }
+        
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px var(--moon-glow);
+            }
+            to {
+                text-shadow: 0 0 15px var(--moon-glow), 0 0 20px var(--moon-glow);
+            }
         }
         
         nav ul {
             display: flex;
             list-style: none;
+            align-items: center;
         }
         
         nav ul li {
@@ -74,21 +108,48 @@
         }
         
         nav ul li a {
-            color: white;
+            color: var(--light);
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s;
+            position: relative;
+        }
+        
+        nav ul li a::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s;
+            z-index: 1;
         }
         
         nav ul li a:hover {
             color: var(--secondary);
         }
         
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
         .cart-icon {
             background-color: var(--secondary);
-            padding: 8px 12px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             position: relative;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .cart-icon:hover {
+            transform: scale(1.1);
         }
         
         .cart-count {
@@ -108,29 +169,51 @@
         
         /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1542280756-74b2f55e73ab') center/cover no-repeat;
+            background: url('https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
             color: white;
             text-align: center;
-            padding: 100px 20px;
+            padding: 150px 20px;
             margin-bottom: 50px;
+            position: relative;
+            border-radius: 0 0 20px 20px;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(12, 36, 97, 0.7), rgba(30, 39, 46, 0.9));
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
         }
         
         .hero h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
         
         .hero p {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             max-width: 700px;
             margin: 0 auto 30px;
+            font-style: italic;
         }
         
         .btn {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             background-color: var(--secondary);
             color: white;
-            padding: 12px 30px;
+            padding: 15px 35px;
             border-radius: 30px;
             text-decoration: none;
             font-weight: bold;
@@ -138,12 +221,55 @@
             transition: all 0.3s;
             border: none;
             cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            gap: 10px;
         }
         
         .btn:hover {
-            background-color: #d35400;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            background-color: #e84393;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+        
+        .btn-sm {
+            padding: 10px 20px;
+            font-size: 0.9rem;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+        }
+        
+        .btn-outline:hover {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .btn-danger {
+            background-color: var(--danger);
+        }
+        
+        .btn-danger:hover {
+            background-color: #ff7675;
+        }
+        
+        .btn-success {
+            background-color: var(--success);
+        }
+        
+        .btn-success:hover {
+            background-color: #00a382;
+        }
+        
+        .btn-warning {
+            background-color: var(--warning);
+            color: var(--dark);
+        }
+        
+        .btn-warning:hover {
+            background-color: #f9bf45;
         }
         
         /* Features */
@@ -158,227 +284,244 @@
             flex: 1;
             min-width: 250px;
             text-align: center;
-            padding: 20px;
-            margin: 10px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-        
-        .feature i {
-            font-size: 2.5rem;
-            color: var(--accent);
-            margin-bottom: 15px;
-        }
-        
-        /* Products */
-        .section-title {
-            text-align: center;
-            margin: 50px 0 30px;
-            color: var(--dark);
-            position: relative;
-        }
-        
-        .section-title:after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 4px;
-            background-color: var(--secondary);
-            margin: 10px auto;
-        }
-        
-        .products {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
-            margin-bottom: 50px;
-        }
-        
-        .product {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 30px 20px;
+            margin: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
             transition: transform 0.3s;
+            cursor: pointer;
         }
         
-        .product:hover {
+        .feature:hover {
             transform: translateY(-10px);
         }
         
-        .product-img {
-            height: 200px;
-            overflow: hidden;
+        .feature i {
+            font-size: 3rem;
+            color: var(--moon-glow);
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px var(--moon-glow);
         }
         
-        .product-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-        
-        .product:hover .product-img img {
-            transform: scale(1.1);
-        }
-        
-        .product-info {
-            padding: 20px;
-        }
-        
-        .product-title {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            color: var(--dark);
-        }
-        
-        .product-price {
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: var(--secondary);
+        .feature h3 {
             margin-bottom: 15px;
+            color: var(--light);
         }
         
-        /* Testimonials */
-        .testimonials {
-            background-color: var(--light);
-            padding: 60px 0;
-            margin: 50px 0;
+        .feature p {
+            color: #dfe6e9;
         }
         
-        .testimonial-container {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            gap: 30px;
-            padding: 20px 0;
-        }
-        
-        .testimonial {
-            scroll-snap-align: start;
-            flex: 0 0 350px;
-            background: white;
+        /* Sección de Devoluciones */
+        .returns-section {
+            background: rgba(255, 255, 255, 0.1);
             padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            margin: 40px 0;
+            backdrop-filter: blur(10px);
+            display: none;
         }
         
-        .testimonial-text {
-            font-style: italic;
-            margin-bottom: 20px;
+        .returns-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
         }
         
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-        }
-        
-        .testimonial-author img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-right: 15px;
-        }
-        
-        /* CTA Section */
-        .cta {
-            background: linear-gradient(to right, var(--primary), var(--dark));
-            color: white;
-            text-align: center;
-            padding: 80px 20px;
-            border-radius: 10px;
-            margin: 50px 0;
-        }
-        
-        .cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-        
-        .cta p {
-            max-width: 700px;
-            margin: 0 auto 30px;
-            font-size: 1.1rem;
-        }
-        
-        /* Footer */
-        footer {
-            background-color: var(--dark);
-            color: white;
-            padding: 50px 0 20px;
-        }
-        
-        .footer-content {
+        .returns-header {
             display: flex;
             justify-content: space-between;
-            flex-wrap: wrap;
-            margin-bottom: 30px;
+            align-items: center;
+            margin-bottom: 25px;
         }
         
-        .footer-section {
-            flex: 1;
-            min-width: 250px;
-            margin-bottom: 30px;
-            padding: 0 20px;
+        .returns-section h2 {
+            color: var(--light);
+            font-size: 2rem;
         }
         
-        .footer-section h3 {
-            font-size: 1.3rem;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 10px;
-        }
-        
-        .footer-section h3:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 2px;
-            background-color: var(--secondary);
-        }
-        
-        .footer-links {
-            list-style: none;
-        }
-        
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-        
-        .footer-links a {
-            color: #ddd;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .footer-links a:hover {
-            color: var(--secondary);
-        }
-        
-        .social-icons {
+        .back-to-features {
             display: flex;
-            gap: 15px;
+            align-items: center;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .back-to-features i {
+            margin-right: 8px;
+        }
+        
+        .back-to-features:hover {
+            text-decoration: underline;
+        }
+        
+        .returns-tabs {
+            display: flex;
+            margin-bottom: 25px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .returns-tab {
+            padding: 15px 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .returns-tab.active {
+            color: var(--secondary);
+            border-bottom: 3px solid var(--secondary);
+        }
+        
+        .returns-content {
+            display: none;
+        }
+        
+        .returns-content.active {
+            display: block;
+        }
+        
+        .returns-form {
+            display: grid;
+            gap: 20px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group label {
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .returns-list {
             margin-top: 20px;
         }
         
-        .social-icons a {
-            color: white;
-            font-size: 1.2rem;
-            transition: color 0.3s;
+        .returns-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
         }
         
-        .social-icons a:hover {
-            color: var(--secondary);
+        .returns-table th,
+        .returns-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        .footer-bottom {
+        .returns-table th {
+            background: rgba(255, 255, 255, 0.1);
+            font-weight: bold;
+            color: var(--accent);
+        }
+        
+        .returns-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .returns-table tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .status-pending {
+            background: rgba(253, 203, 110, 0.2);
+            color: var(--warning);
+        }
+        
+        .status-approved {
+            background: rgba(0, 184, 148, 0.2);
+            color: var(--success);
+        }
+        
+        .status-rejected {
+            background: rgba(214, 48, 49, 0.2);
+            color: var(--danger);
+        }
+        
+        .returns-empty {
             text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            color: #dfe6e9;
+        }
+        
+        .returns-empty i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Modal de confirmación */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: rgba(30, 39, 46, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+        
+        .modal h3 {
+            margin-bottom: 20px;
+            color: var(--light);
+        }
+        
+        .modal-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
         }
         
         /* Responsive */
@@ -391,21 +534,37 @@
             nav ul {
                 margin-top: 20px;
                 justify-content: center;
+                flex-wrap: wrap;
             }
             
             nav ul li {
-                margin: 0 10px;
+                margin: 8px 15px;
             }
             
             .hero h1 {
-                font-size: 2.2rem;
+                font-size: 2.5rem;
             }
             
             .features {
                 flex-direction: column;
             }
             
-            .footer-content {
+            .returns-tabs {
+                flex-direction: column;
+            }
+            
+            .returns-table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            .returns-header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .modal-buttons {
                 flex-direction: column;
             }
         }
@@ -416,21 +575,20 @@
     <header>
         <div class="container header-content">
             <div class="logo">
-                <i class="fas fa-shoe-prints"></i>
-                <span>EliteStep</span>
+                <i class="fas fa-moon"></i>
+                <span>La Calle de Luna</span>
             </div>
             <nav>
                 <ul>
                     <li><a href="#">Inicio</a></li>
-                    <li><a href="#">Productos</a></li>
-                    <li><a href="#">Categorías</a></li>
+                    <li><a href="#">Catálogos</a></li>
                     <li><a href="#">Ofertas</a></li>
                     <li><a href="#">Contacto</a></li>
                     <li>
-                        <a href="#" class="cart-icon">
+                        <div class="cart-icon" id="header-cart">
                             <i class="fas fa-shopping-cart"></i>
-                            <span class="cart-count">3</span>
-                        </a>
+                            <span class="cart-count">0</span>
+                        </div>
                     </li>
                 </ul>
             </nav>
@@ -439,206 +597,354 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="container">
-            <h1>Calzado de Hombre con Estilo y Comodidad</h1>
-            <p>Descubre nuestra colección exclusiva de calzado masculino diseñado para destacar en cualquier ocasión. Calidad premium y confort incomparable.</p>
-            <a href="#products" class="btn">Ver Colección</a>
+        <div class="container hero-content">
+            <h1>Bienvenidos a "La Calle de Luna"</h1>
+            <p>"Donde la moda se encuentra con la magia de la noche"</p>
+            <a href="#features" class="btn">Descubrir Colecciones</a>
         </div>
     </section>
 
     <!-- Features -->
-    <div class="container">
+    <div class="container" id="features">
         <div class="features">
-            <div class="feature">
-                <i class="fas fa-truck"></i>
-                <h3>Envío Gratis</h3>
-                <p>En todos los pedidos superiores a $99</p>
+            <div class="feature" id="view-cart-feature">
+                <i class="fas fa-shopping-cart"></i>
+                <h3>Productos al Carrito</h3>
+                <p>Gestiona todos tus productos seleccionados</p>
             </div>
-            <div class="feature">
-                <i class="fas fa-undo"></i>
-                <h3>Devoluciones</h3>
-                <p>30 días para devoluciones sin problemas</p>
-            </div>
-            <div class="feature">
+            <div class="feature" id="secure-payment-feature">
                 <i class="fas fa-shield-alt"></i>
                 <h3>Pago Seguro</h3>
-                <p>Transacciones protegidas y seguras</p>
+                <p>Consulta y gestiona tus pedidos realizados</p>
             </div>
-            <div class="feature">
+            <div class="feature" id="support-feature">
                 <i class="fas fa-headset"></i>
                 <h3>Soporte 24/7</h3>
                 <p>Asistencia personalizada cuando la necesites</p>
             </div>
-        </div>
-    </div>
-
-    <!-- Products -->
-    <div class="container">
-        <h2 class="section-title" id="products">Nuestros Productos Destacados</h2>
-        <div class="products">
-            <div class="product">
-                <div class="product-img">
-                    <img src="https://images.unsplash.com/photo-1668069226492-508742b03147?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8emFwYXRvcyUyMGZvcm1hbGVzfGVufDB8fDB8fHww" alt="Zapatos formales">
-                </div>
-                <div class="product-info">
-                    <h3 class="product-title">Zapato Formal Classic</h3>
-                    <p class="product-price">$129.99</p>
-                    <a href="#" class="btn">Añadir al Carrito</a>
-                </div>
-            </div>
-            <div class="product">
-                <div class="product-img">
-                    <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa" alt="Zapatillas deportivas">
-                </div>
-                <div class="product-info">
-                    <h3 class="product-title">Zapatillas Runner Pro</h3>
-                    <p class="product-price">$89.99</p>
-                    <a href="#" class="btn">Añadir al Carrito</a>
-                </div>
-            </div>
-            <div class="product">
-                <div class="product-img">
-                    <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a" alt="Botas de cuero">
-                </div>
-                <div class="product-info">
-                    <h3 class="product-title">Bota Cuero Premium</h3>
-                    <p class="product-price">$149.99</p>
-                    <a href="#" class="btn">Añadir al Carrito</a>
-                </div>
-            </div>
-            <div class="product">
-                <div class="product-img">
-                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff" alt="Zapatos casuales">
-                </div>
-                <div class="product-info">
-                    <h3 class="product-title">Mocasín Elegance</h3>
-                    <p class="product-price">$79.99</p>
-                    <a href="#" class="btn">Añadir al Carrito</a>
-                </div>
+            <div class="feature" id="returns-feature">
+                <i class="fas fa-undo"></i>
+                <h3>Devoluciones</h3>
+                <p>30 días para devoluciones sin problemas</p>
             </div>
         </div>
     </div>
 
-    <!-- Testimonials -->
-    <section class="testimonials">
+    <!-- Sección de Devoluciones -->
+    <section class="returns-section" id="returns-section">
         <div class="container">
-            <h2 class="section-title">Opiniones de Clientes</h2>
-            <div class="testimonial-container">
-                <div class="testimonial">
-                    <p class="testimonial-text">"Los zapatos son increíblemente cómodos y la calidad supera mis expectativas. Definitivamente volveré a comprar."</p>
-                    <div class="testimonial-author">
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Carlos Rodríguez">
-                        <div>
-                            <h4>Carlos Rodríguez</h4>
-                            <p>Cliente desde 2022</p>
-                        </div>
+            <div class="returns-header">
+                <h2>Gestión de Devoluciones</h2>
+                <a href="#" class="back-to-features" id="back-to-features-from-returns">
+                    <i class="fas fa-arrow-left"></i> Volver a características
+                </a>
+            </div>
+            
+            <div class="returns-tabs">
+                <div class="returns-tab active" data-tab="request">Solicitar Devolución</div>
+                <div class="returns-tab" data-tab="list">Devoluciones Registradas</div>
+            </div>
+            
+            <div class="returns-content active" id="request-tab">
+                <form class="returns-form" id="returns-form">
+                    <div class="form-group">
+                        <label for="return-order-id">Número de pedido *</label>
+                        <input type="text" id="return-order-id" required placeholder="Ej: #1001">
                     </div>
-                </div>
-                <div class="testimonial">
-                    <p class="testimonial-text">"El envío fue rápido y el producto llegó en perfectas condiciones. La talla era la correcta y el material es de primera calidad."</p>
-                    <div class="testimonial-author">
-                        <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Javier López">
-                        <div>
-                            <h4>Javier López</h4>
-                            <p>Cliente desde 2023</p>
-                        </div>
+                    
+                    <div class="form-group">
+                        <label for="return-name">Nombre completo *</label>
+                        <input type="text" id="return-name" required>
                     </div>
-                </div>
-                <div class="testimonial">
-                    <p class="testimonial-text">"He comprado varios pares de zapatos y todos han sido excelentes. La relación calidad-precio es insuperable en el mercado."</p>
-                    <div class="testimonial-author">
-                        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Miguel Sánchez">
-                        <div>
-                            <h4>Miguel Sánchez</h4>
-                            <p>Cliente desde 2021</p>
-                        </div>
+                    
+                    <div class="form-group">
+                        <label for="return-email">Correo electrónico *</label>
+                        <input type="email" id="return-email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="return-phone">Teléfono de contacto *</label>
+                        <input type="tel" id="return-phone" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="return-products">Productos a devolver *</label>
+                        <textarea id="return-products" required placeholder="Indica los productos, tallas y cantidades que deseas devolver"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="return-amount">Monto a devolver *</label>
+                        <input type="number" id="return-amount" required placeholder="0.00" step="0.01" min="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="return-reason">Motivo de la devolución *</label>
+                        <select id="return-reason" required>
+                            <option value="">Selecciona un motivo</option>
+                            <option value="talla-incorrecta">Talla incorrecta</option>
+                            <option value="color-diferente">Color diferente al esperado</option>
+                            <option value="defecto-producto">Producto defectuoso</option>
+                            <option value="arrepentimiento">Arrepentimiento de compra</option>
+                            <option value="otro">Otro motivo</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="return-details">Detalles adicionales</label>
+                        <textarea id="return-details" placeholder="Proporciona más detalles sobre el motivo de tu devolución"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-warning">
+                        <i class="fas fa-undo"></i> Solicitar Devolución
+                    </button>
+                </form>
+            </div>
+            
+            <div class="returns-content" id="list-tab">
+                <div class="returns-list" id="returns-list">
+                    <table class="returns-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Cliente</th>
+                                <th>Email</th>
+                                <th>Productos</th>
+                                <th>Monto</th>
+                                <th>Estado</th>
+                                <th>Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody id="returns-table-body">
+                            <!-- Las devoluciones se cargarán dinámicamente aquí -->
+                        </tbody>
+                    </table>
+                    <div class="returns-empty" id="returns-empty">
+                        <i class="fas fa-box-open"></i>
+                        <h3>No hay devoluciones registradas</h3>
+                        <p>Todas las solicitudes de devolución aparecerán aquí</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <div class="container">
-        <div class="cta">
-            <h2>¡Oferta Especial por Tiempo Limitado!</h2>
-            <p>Obtén un 20% de descuento en tu primera compra usando el código BIENVENIDO20. ¡No pierdas esta oportunidad!</p>
-            <a href="#" class="btn">Aprovechar Oferta</a>
+    <!-- Modal de confirmación de devolución -->
+    <div class="modal" id="return-confirmation-modal">
+        <div class="modal-content">
+            <h3>¡Solicitud de devolución recibida!</h3>
+            <p>Hemos recibido tu solicitud de devolución. Nos pondremos en contacto contigo en un plazo máximo de 48 horas para gestionar el proceso.</p>
+            <div class="modal-buttons">
+                <button class="btn" id="return-modal-close-btn">
+                    <i class="fas fa-check"></i> Aceptar
+                </button>
+            </div>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>EliteStep</h3>
-                    <p>Calzado de calidad para hombres que valoran el estilo, la comodidad y la durabilidad.</p>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-pinterest"></i></a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h3>Enlaces Rápidos</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Sobre Nosotros</a></li>
-                        <li><a href="#">Preguntas Frecuentes</a></li>
-                        <li><a href="#">Política de Envíos</a></li>
-                        <li><a href="#">Términos y Condiciones</a></li>
-                        <li><a href="#">Política de Privacidad</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Contacto</h3>
-                    <ul class="footer-links">
-                        <li><i class="fas fa-map-marker-alt"></i> Calle Principal 123, Ciudad</li>
-                        <li><i class="fas fa-phone"></i> +34 912 345 678</li>
-                        <li><i class="fas fa-envelope"></i> info@elitestep.com</li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Newsletter</h3>
-                    <p>Suscríbete para recibir nuestras últimas novedades y ofertas exclusivas.</p>
-                    <form>
-                        <input type="email" placeholder="Tu correo electrónico" style="padding:10px; width:100%; margin-bottom:10px; border-radius:5px; border:none;">
-                        <button type="submit" class="btn" style="width:100%">Suscribirse</button>
-                    </form>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2023 EliteStep - Todos los derechos reservados</p>
-            </div>
-        </div>
-    </footer>
-
     <script>
-        // Simple cart functionality for demonstration
+        // Datos de ejemplo para devoluciones
+        const devolucionesEjemplo = [
+            {
+                id: "DEV-0001",
+                cliente: "María González",
+                email: "maria.gonzalez@email.com",
+                productos: "Vestido Noche Estrellada (Talla M)",
+                monto: 89.99,
+                estado: "pending",
+                fecha: "2023-10-15"
+            },
+            {
+                id: "DEV-0002",
+                cliente: "Carlos Rodríguez",
+                email: "carlos.rodriguez@email.com",
+                productos: "Zapatos Estrella Fugaz (Talla 42), Cinturón Lunar",
+                monto: 134.98,
+                estado: "approved",
+                fecha: "2023-10-10"
+            },
+            {
+                id: "DEV-0003",
+                cliente: "Ana Martínez",
+                email: "ana.martinez@email.com",
+                productos: "Bolso Noche Estrellada",
+                monto: 79.99,
+                estado: "rejected",
+                fecha: "2023-10-05"
+            }
+        ];
+
+        // Almacenamiento de devoluciones
+        let devoluciones = JSON.parse(localStorage.getItem('devoluciones')) || devolucionesEjemplo;
+        let nextReturnId = 1004; // Para generar nuevos IDs
+
         document.addEventListener('DOMContentLoaded', function() {
-            const addToCartButtons = document.querySelectorAll('.product .btn');
-            const cartCount = document.querySelector('.cart-count');
-            let count = 3; // Starting with 3 items in cart for demo
+            const returnsFeature = document.getElementById('returns-feature');
+            const returnsSection = document.getElementById('returns-section');
+            const backToFeaturesFromReturns = document.getElementById('back-to-features-from-returns');
+            const returnsForm = document.getElementById('returns-form');
+            const returnConfirmationModal = document.getElementById('return-confirmation-modal');
+            const returnModalCloseBtn = document.getElementById('return-modal-close-btn');
+            const returnsTabs = document.querySelectorAll('.returns-tab');
+            const returnsContents = document.querySelectorAll('.returns-content');
+            const returnsTableBody = document.getElementById('returns-table-body');
+            const returnsEmpty = document.getElementById('returns-empty');
             
-            addToCartButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    count++;
-                    cartCount.textContent = count;
+            // Función para mostrar/ocultar secciones
+            function showSection(sectionToShow) {
+                // Ocultar todas las secciones principales
+                document.querySelectorAll('.features, .returns-section').forEach(section => {
+                    section.style.display = 'none';
+                });
+                
+                // Mostrar la sección solicitada
+                if (sectionToShow) {
+                    sectionToShow.style.display = 'block';
+                    sectionToShow.classList.add('active');
                     
-                    // Animation for feedback
-                    button.textContent = '✓ Añadido';
-                    button.style.backgroundColor = '#27ae60';
+                    // Desplazarse suavemente a la sección
+                    window.scrollTo({
+                        top: sectionToShow.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+            
+            // Función para cambiar entre pestañas
+            function changeTab(tabName) {
+                // Actualizar pestañas activas
+                returnsTabs.forEach(tab => {
+                    if (tab.getAttribute('data-tab') === tabName) {
+                        tab.classList.add('active');
+                    } else {
+                        tab.classList.remove('active');
+                    }
+                });
+                
+                // Actualizar contenido visible
+                returnsContents.forEach(content => {
+                    if (content.id === `${tabName}-tab`) {
+                        content.classList.add('active');
+                    } else {
+                        content.classList.remove('active');
+                    }
+                });
+                
+                // Si es la pestaña de listado, cargar las devoluciones
+                if (tabName === 'list') {
+                    renderReturnsList();
+                }
+            }
+            
+            // Función para renderizar la lista de devoluciones
+            function renderReturnsList() {
+                returnsTableBody.innerHTML = '';
+                
+                if (devoluciones.length === 0) {
+                    returnsEmpty.style.display = 'block';
+                    document.querySelector('.returns-table').style.display = 'none';
+                    return;
+                }
+                
+                returnsEmpty.style.display = 'none';
+                document.querySelector('.returns-table').style.display = 'table';
+                
+                devoluciones.forEach(dev => {
+                    const row = document.createElement('tr');
                     
-                    setTimeout(() => {
-                        button.textContent = 'Añadir al Carrito';
-                        button.style.backgroundColor = '';
-                    }, 1500);
+                    // Determinar la clase de estado
+                    let statusClass = '';
+                    let statusText = '';
+                    
+                    switch(dev.estado) {
+                        case 'pending':
+                            statusClass = 'status-pending';
+                            statusText = 'Pendiente';
+                            break;
+                        case 'approved':
+                            statusClass = 'status-approved';
+                            statusText = 'Aprobada';
+                            break;
+                        case 'rejected':
+                            statusClass = 'status-rejected';
+                            statusText = 'Rechazada';
+                            break;
+                    }
+                    
+                    row.innerHTML = `
+                        <td>${dev.id}</td>
+                        <td>${dev.cliente}</td>
+                        <td>${dev.email}</td>
+                        <td>${dev.productos}</td>
+                        <td>$${dev.monto.toFixed(2)}</td>
+                        <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+                        <td>${dev.fecha}</td>
+                    `;
+                    
+                    returnsTableBody.appendChild(row);
+                });
+            }
+            
+            // Función para guardar devoluciones en localStorage
+            function saveReturns() {
+                localStorage.setItem('devoluciones', JSON.stringify(devoluciones));
+            }
+            
+            // Mostrar sección de devoluciones al hacer clic en la característica
+            returnsFeature.addEventListener('click', function() {
+                showSection(returnsSection);
+            });
+            
+            // Volver a características desde devoluciones
+            backToFeaturesFromReturns.addEventListener('click', function(e) {
+                e.preventDefault();
+                showSection(document.querySelector('.features'));
+            });
+            
+            // Cambiar entre pestañas
+            returnsTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabName = this.getAttribute('data-tab');
+                    changeTab(tabName);
                 });
             });
+            
+            // Enviar formulario de devoluciones
+            returnsForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Crear nueva devolución
+                const newReturn = {
+                    id: `DEV-${nextReturnId.toString().padStart(4, '0')}`,
+                    cliente: document.getElementById('return-name').value,
+                    email: document.getElementById('return-email').value,
+                    productos: document.getElementById('return-products').value,
+                    monto: parseFloat(document.getElementById('return-amount').value),
+                    estado: 'pending',
+                    fecha: new Date().toISOString().split('T')[0]
+                };
+                
+                // Agregar a la lista
+                devoluciones.unshift(newReturn);
+                nextReturnId++;
+                
+                // Guardar en localStorage
+                saveReturns();
+                
+                // Mostrar modal de confirmación
+                returnConfirmationModal.classList.add('active');
+                
+                // Reiniciar formulario
+                returnsForm.reset();
+            });
+            
+            // Cerrar modal de devolución
+            returnModalCloseBtn.addEventListener('click', function() {
+                returnConfirmationModal.classList.remove('active');
+            });
+            
+            // Inicializar
+            showSection(document.querySelector('.features'));
         });
     </script>
 </body>
-
 </html>
