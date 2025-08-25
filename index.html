@@ -105,7 +105,6 @@
         
         nav ul li {
             margin-left: 25px;
-            position: relative;
         }
         
         nav ul li a {
@@ -114,7 +113,6 @@
             font-weight: 500;
             transition: color 0.3s;
             position: relative;
-            cursor: pointer;
         }
         
         nav ul li a::after {
@@ -167,56 +165,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-        }
-        
-        /* Menú desplegable de catálogos */
-        .dropdown {
-            position: relative;
-        }
-        
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background: rgba(30, 39, 46, 0.95);
-            min-width: 250px;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-            z-index: 1000;
-            backdrop-filter: blur(10px);
-        }
-        
-        .dropdown:hover .dropdown-content {
-            display: block;
-            animation: fadeIn 0.3s ease-in-out;
-        }
-        
-        .dropdown-item {
-            display: block;
-            padding: 12px 15px;
-            color: var(--light);
-            text-decoration: none;
-            border-radius: 6px;
-            margin-bottom: 5px;
-            transition: all 0.3s;
-        }
-        
-        .dropdown-item:hover {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--secondary);
-        }
-        
-        .dropdown-item:last-child {
-            margin-top: 10px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 15px;
-            color: var(--warning);
-        }
-        
-        .dropdown-item:last-child:hover {
-            background: rgba(220, 20, 60, 0.2);
         }
         
         /* Hero Section */
@@ -896,25 +844,104 @@
             font-size: 2rem;
         }
         
-        .back-to-catalog {
+        .returns-tabs {
             display: flex;
-            align-items: center;
-            color: var(--accent);
-            text-decoration: none;
+            margin-bottom: 25px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .returns-tab {
+            padding: 15px 25px;
+            cursor: pointer;
             font-weight: bold;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
         }
         
-        .back-to-catalog i {
-            margin-right: 8px;
+        .returns-tab.active {
+            color: var(--secondary);
+            border-bottom: 3px solid var(--secondary);
         }
         
-        .back-to-catalog:hover {
-            text-decoration: underline;
+        .returns-content {
+            display: none;
+        }
+        
+        .returns-content.active {
+            display: block;
         }
         
         .returns-form {
             display: grid;
             gap: 20px;
+        }
+        
+        .returns-list {
+            margin-top: 20px;
+        }
+        
+        .returns-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .returns-table th,
+        .returns-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .returns-table th {
+            background: rgba(255, 255, 255, 0.1);
+            font-weight: bold;
+            color: var(--accent);
+        }
+        
+        .returns-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .returns-table tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .status-pending {
+            background: rgba(253, 203, 110, 0.2);
+            color: var(--warning);
+        }
+        
+        .status-approved {
+            background: rgba(0, 184, 148, 0.2);
+            color: var(--success);
+        }
+        
+        .status-rejected {
+            background: rgba(214, 48, 49, 0.2);
+            color: var(--danger);
+        }
+        
+        .returns-empty {
+            text-align: center;
+            padding: 40px;
+            color: #dfe6e9;
+        }
+        
+        .returns-empty i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: rgba(255, 255, 255, 0.3);
         }
         
         /* Colecciones por temporada */
@@ -1109,11 +1136,6 @@
                 margin: 8px 15px;
             }
             
-            .dropdown-content {
-                left: 50%;
-                transform: translateX(-50%);
-            }
-            
             .hero h1 {
                 font-size: 2.5rem;
             }
@@ -1172,6 +1194,15 @@
                 justify-content: center;
             }
             
+            .returns-tabs {
+                flex-direction: column;
+            }
+            
+            .returns-table {
+                display: block;
+                overflow-x: auto;
+            }
+            
             .modal-buttons {
                 flex-direction: column;
             }
@@ -1189,16 +1220,7 @@
             <nav>
                 <ul>
                     <li><a href="#">Inicio</a></li>
-                    <li class="dropdown">
-                        <a href="#">Catálogos</a>
-                        <div class="dropdown-content">
-                            <a href="#" class="dropdown-item" data-category="accesorios">Accesorios</a>
-                            <a href="#" class="dropdown-item" data-category="ropa">Ropa</a>
-                            <a href="#" class="dropdown-item" data-category="calzado">Calzado</a>
-                            <a href="#" class="dropdown-item" data-category="colecciones">Colecciones Especiales</a>
-                            <a href="#" class="dropdown-item" id="returns-btn">Devoluciones</a>
-                        </div>
-                    </li>
+                    <li><a href="#">Catálogos</a></li>
                     <li><a href="#">Ofertas</a></li>
                     <li><a href="#">Contacto</a></li>
                     <li>
@@ -1239,7 +1261,7 @@
                 <h3>Soporte 24/7</h3>
                 <p>Asistencia personalizada cuando la necesites</p>
             </div>
-            <div class="feature">
+            <div class="feature" id="returns-feature">
                 <i class="fas fa-undo"></i>
                 <h3>Devoluciones</h3>
                 <p>30 días para devoluciones sin problemas</p>
@@ -1382,59 +1404,97 @@
     <section class="returns-section" id="returns-section">
         <div class="container">
             <div class="returns-header">
-                <h2>Solicitud de Devolución</h2>
-                <a href="#" class="back-to-catalog" id="back-to-catalog">
-                    <i class="fas fa-arrow-left"></i> Volver al catálogo
+                <h2>Gestión de Devoluciones</h2>
+                <a href="#" class="back-to-features" id="back-to-features-from-returns">
+                    <i class="fas fa-arrow-left"></i> Volver a características
                 </a>
             </div>
             
-            <form class="returns-form" id="returns-form">
-                <div class="form-group">
-                    <label for="return-order-id">Número de pedido *</label>
-                    <input type="text" id="return-order-id" required placeholder="Ej: #1001">
+            <div class="returns-tabs">
+                <div class="returns-tab active" data-tab="request">Solicitar Devolución</div>
+                <div class="returns-tab" data-tab="list">Devoluciones Registradas</div>
+            </div>
+            
+            <div class="returns-content active" id="request-tab">
+                <form class="returns-form" id="returns-form">
+                    <div class="form-group">
+                        <label for="return-order-id">Número de pedido *</label>
+                        <input type="text" id="return-order-id" required placeholder="Ej: #1001">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="return-name">Nombre completo *</label>
+                        <input type="text" id="return-name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="return-email">Correo electrónico *</label>
+                        <input type="email" id="return-email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="return-phone">Teléfono de contacto *</label>
+                        <input type="tel" id="return-phone" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="return-products">Productos a devolver *</label>
+                        <textarea id="return-products" required placeholder="Indica los productos, tallas y cantidades que deseas devolver"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="return-amount">Monto a devolver *</label>
+                        <input type="number" id="return-amount" required placeholder="0.00" step="0.01" min="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="return-reason">Motivo de la devolución *</label>
+                        <select id="return-reason" required>
+                            <option value="">Selecciona un motivo</option>
+                            <option value="talla-incorrecta">Talla incorrecta</option>
+                            <option value="color-diferente">Color diferente al esperado</option>
+                            <option value="defecto-producto">Producto defectuoso</option>
+                            <option value="arrepentimiento">Arrepentimiento de compra</option>
+                            <option value="otro">Otro motivo</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="return-details">Detalles adicionales</label>
+                        <textarea id="return-details" placeholder="Proporciona más detalles sobre el motivo de tu devolución"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-warning">
+                        <i class="fas fa-undo"></i> Solicitar Devolución
+                    </button>
+                </form>
+            </div>
+            
+            <div class="returns-content" id="list-tab">
+                <div class="returns-list" id="returns-list">
+                    <table class="returns-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Cliente</th>
+                                <th>Email</th>
+                                <th>Productos</th>
+                                <th>Monto</th>
+                                <th>Estado</th>
+                                <th>Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody id="returns-table-body">
+                            <!-- Las devoluciones se cargarán dinámicamente aquí -->
+                        </tbody>
+                    </table>
+                    <div class="returns-empty" id="returns-empty">
+                        <i class="fas fa-box-open"></i>
+                        <h3>No hay devoluciones registradas</h3>
+                        <p>Todas las solicitudes de devolución aparecerán aquí</p>
+                    </div>
                 </div>
-                
-                <div class="form-group">
-                    <label for="return-name">Nombre completo *</label>
-                    <input type="text" id="return-name" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="return-email">Correo electrónico *</label>
-                    <input type="email" id="return-email" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="return-phone">Teléfono de contacto *</label>
-                    <input type="tel" id="return-phone" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="return-products">Productos a devolver *</label>
-                    <textarea id="return-products" required placeholder="Indica los productos, tallas y cantidades que deseas devolver"></textarea>
-                </div>
-                
-                <div class="form-group">
-                    <label for="return-reason">Motivo de la devolución *</label>
-                    <select id="return-reason" required>
-                        <option value="">Selecciona un motivo</option>
-                        <option value="talla-incorrecta">Talla incorrecta</option>
-                        <option value="color-diferente">Color diferente al esperado</option>
-                        <option value="defecto-producto">Producto defectuoso</option>
-                        <option value="arrepentimiento">Arrepentimiento de compra</option>
-                        <option value="otro">Otro motivo</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="return-details">Detalles adicionales</label>
-                    <textarea id="return-details" placeholder="Proporciona más detalles sobre el motivo de tu devolución"></textarea>
-                </div>
-                
-                <button type="submit" class="btn btn-warning">
-                    <i class="fas fa-undo"></i> Solicitar Devolución
-                </button>
-            </form>
+            </div>
         </div>
     </section>
 
@@ -1548,14 +1608,14 @@
                 { id: 2, name: "Anillo Estrella Nocturna", price: 39.99, img: "https://images.unsplash.com/photo-1611010344444-5f9e4d86a6e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=776&q=80" },
                 { id: 3, name: "Bolso Noche Estrellada", price: 79.99, img: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" },
                 { id: 4, name: "Gafas de Sol Nocturnas", price: 59.99, img: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1035&q=80" },
-                { id: 5, name: "Pulsera Constelación", price: 34.99, img: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwa90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" },
+                { id: 5, name: "Pulsera Constelación", price: 34.99, img: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" },
                 { id: 6, name: "Reloj Luna Creciente", price: 89.99, img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=799&q=80" }
             ],
             ropa: [
                 { id: 7, name: "Vestido Noche Estrellada", price: 89.99, img: "https://images.unsplash.com/photo-1529903384028-929ae5dccdf1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" },
                 { id: 8, name: "Abrigo Luna Llena", price: 129.99, img: "https://images.unsplash.com/photo-1551028719-00167b16eac5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80" },
                 { id: 9, name: "Camiseta Eclipse", price: 39.99, img: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=580&q=80" },
-                { id: 10, name: "Falda Galaxia", price: 59.99, img: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=c crop&w=464&q=80" },
+                { id: 10, name: "Falda Galaxia", price: 59.99, img: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=464&q=80" },
                 { id: 11, name: "Jeans Crepúsculo", price: 69.99, img: "https://images.unsplash.com/photo-1542272604-787c3835535d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=826&q=80" },
                 { id: 12, name: "Chaqueta Medianoche", price: 99.99, img: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=436&q=80" }
             ],
@@ -1576,6 +1636,37 @@
                 { id: 24, name: "Colección Aniversario Luna", price: 349.99, img: "https://images.unsplash.com/photo-1556906781-2f0520405b71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80" }
             ]
         };
+
+        // Datos de ejemplo para devoluciones
+        const devolucionesEjemplo = [
+            {
+                id: "DEV-0001",
+                cliente: "María González",
+                email: "maria.gonzalez@email.com",
+                productos: "Vestido Noche Estrellada (Talla M)",
+                monto: 89.99,
+                estado: "pending",
+                fecha: "2023-10-15"
+            },
+            {
+                id: "DEV-0002",
+                cliente: "Carlos Rodríguez",
+                email: "carlos.rodriguez@email.com",
+                productos: "Zapatos Estrella Fugaz (Talla 42), Cinturón Lunar",
+                monto: 134.98,
+                estado: "approved",
+                fecha: "2023-10-10"
+            },
+            {
+                id: "DEV-0003",
+                cliente: "Ana Martínez",
+                email: "ana.martinez@email.com",
+                productos: "Bolso Noche Estrellada",
+                monto: 79.99,
+                estado: "rejected",
+                fecha: "2023-10-05"
+            }
+        ];
 
         // Carrito de compras
         document.addEventListener('DOMContentLoaded', function() {
@@ -1598,17 +1689,20 @@
             const viewCartFeature = document.getElementById('view-cart-feature');
             const securePaymentFeature = document.getElementById('secure-payment-feature');
             const supportFeature = document.getElementById('support-feature');
+            const returnsFeature = document.getElementById('returns-feature');
             const headerCart = document.getElementById('header-cart');
             const backToShopping = document.getElementById('back-to-shopping');
             const backToFeaturesFromOrders = document.getElementById('back-to-features-from-orders');
             const backToFeaturesFromSupport = document.getElementById('back-to-features-from-support');
-            const backToCatalog = document.getElementById('back-to-catalog');
+            const backToFeaturesFromReturns = document.getElementById('back-to-features-from-returns');
             const ordersList = document.getElementById('orders-list');
             const orderEmpty = document.getElementById('order-empty');
             const supportForm = document.getElementById('support-form');
             const returnsForm = document.getElementById('returns-form');
-            const returnsBtn = document.getElementById('returns-btn');
-            const dropdownItems = document.querySelectorAll('.dropdown-item');
+            const returnsTabs = document.querySelectorAll('.returns-tab');
+            const returnsContents = document.querySelectorAll('.returns-content');
+            const returnsTableBody = document.getElementById('returns-table-body');
+            const returnsEmpty = document.getElementById('returns-empty');
             const confirmationModal = document.getElementById('confirmation-modal');
             const returnConfirmationModal = document.getElementById('return-confirmation-modal');
             const continueShoppingBtn = document.getElementById('continue-shopping-btn');
@@ -1619,6 +1713,8 @@
             let itemCount = 0;
             let orders = [];
             let orderIdCounter = 1000;
+            let devoluciones = JSON.parse(localStorage.getItem('devoluciones')) || devolucionesEjemplo;
+            let nextReturnId = 1004; // Para generar nuevos IDs
             
             // Función para mostrar/ocultar secciones
             function showSection(sectionToShow) {
@@ -1870,6 +1966,86 @@
                 });
             }
             
+            // Función para renderizar la lista de devoluciones
+            function renderReturnsList() {
+                returnsTableBody.innerHTML = '';
+                
+                if (devoluciones.length === 0) {
+                    returnsEmpty.style.display = 'block';
+                    document.querySelector('.returns-table').style.display = 'none';
+                    return;
+                }
+                
+                returnsEmpty.style.display = 'none';
+                document.querySelector('.returns-table').style.display = 'table';
+                
+                devoluciones.forEach(dev => {
+                    const row = document.createElement('tr');
+                    
+                    // Determinar la clase de estado
+                    let statusClass = '';
+                    let statusText = '';
+                    
+                    switch(dev.estado) {
+                        case 'pending':
+                            statusClass = 'status-pending';
+                            statusText = 'Pendiente';
+                            break;
+                        case 'approved':
+                            statusClass = 'status-approved';
+                            statusText = 'Aprobada';
+                            break;
+                        case 'rejected':
+                            statusClass = 'status-rejected';
+                            statusText = 'Rechazada';
+                            break;
+                    }
+                    
+                    row.innerHTML = `
+                        <td>${dev.id}</td>
+                        <td>${dev.cliente}</td>
+                        <td>${dev.email}</td>
+                        <td>${dev.productos}</td>
+                        <td>$${dev.monto.toFixed(2)}</td>
+                        <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+                        <td>${dev.fecha}</td>
+                    `;
+                    
+                    returnsTableBody.appendChild(row);
+                });
+            }
+            
+            // Función para cambiar entre pestañas de devoluciones
+            function changeReturnTab(tabName) {
+                // Actualizar pestañas activas
+                returnsTabs.forEach(tab => {
+                    if (tab.getAttribute('data-tab') === tabName) {
+                        tab.classList.add('active');
+                    } else {
+                        tab.classList.remove('active');
+                    }
+                });
+                
+                // Actualizar contenido visible
+                returnsContents.forEach(content => {
+                    if (content.id === `${tabName}-tab`) {
+                        content.classList.add('active');
+                    } else {
+                        content.classList.remove('active');
+                    }
+                });
+                
+                // Si es la pestaña de listado, cargar las devoluciones
+                if (tabName === 'list') {
+                    renderReturnsList();
+                }
+            }
+            
+            // Función para guardar devoluciones en localStorage
+            function saveReturns() {
+                localStorage.setItem('devoluciones', JSON.stringify(devoluciones));
+            }
+            
             // Función para añadir producto al carrito
             function addToCart(id, name, price, img) {
                 const existingItem = cart.find(item => item.id === id);
@@ -1996,6 +2172,28 @@
                 renderCartItems();
             }
             
+            // Añadir event listeners a los botones de añadir al carrito
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('add-to-cart')) {
+                    const button = e.target;
+                    const id = button.getAttribute('data-id');
+                    const name = button.getAttribute('data-name');
+                    const price = button.getAttribute('data-price');
+                    const img = button.getAttribute('data-img');
+                    
+                    addToCart(id, name, price, img);
+                    
+                    // Animation for feedback
+                    button.innerHTML = '<i class="fas fa-check"></i> Añadido';
+                    button.style.backgroundColor = '#27ae60';
+                    
+                    setTimeout(() => {
+                        button.innerHTML = '<i class="fas fa-cart-plus"></i> Añadir al Carrito';
+                        button.style.backgroundColor = '';
+                    }, 1500);
+                }
+            });
+            
             // Mostrar/ocultar productos al hacer clic en categorías
             categoryItems.forEach(item => {
                 item.addEventListener('click', function() {
@@ -2009,31 +2207,6 @@
                     renderProducts(category);
                     showSection(productsSection);
                 });
-            });
-            
-            // Mostrar categorías desde el menú desplegable
-            dropdownItems.forEach(item => {
-                item.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    const category = this.getAttribute('data-category');
-                    if (category) {
-                        // Remover clase active de todos los items
-                        categoryItems.forEach(i => i.classList.remove('active'));
-                        
-                        // Añadir clase active al item correspondiente
-                        document.querySelector(`.category-item[data-category="${category}"]`).classList.add('active');
-                        
-                        renderProducts(category);
-                        showSection(productsSection);
-                    }
-                });
-            });
-            
-            // Mostrar sección de devoluciones
-            returnsBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                showSection(returnsSection);
             });
             
             // Mostrar carrito al hacer clic en "Productos al Carrito"
@@ -2052,6 +2225,12 @@
                 showSection(supportSection);
             });
             
+            // Mostrar devoluciones al hacer clic en "Devoluciones"
+            returnsFeature.addEventListener('click', function() {
+                showSection(returnsSection);
+                changeReturnTab('request');
+            });
+            
             // Mostrar carrito al hacer clic en el icono del carrito
             headerCart.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -2067,19 +2246,27 @@
             // Volver a características desde pedidos
             backToFeaturesFromOrders.addEventListener('click', function(e) {
                 e.preventDefault();
-                showSection(document.querySelector('.categories'));
+                showSection(document.querySelector('.features'));
             });
             
             // Volver a características desde soporte
             backToFeaturesFromSupport.addEventListener('click', function(e) {
                 e.preventDefault();
-                showSection(document.querySelector('.categories'));
+                showSection(document.querySelector('.features'));
             });
             
-            // Volver al catálogo desde devoluciones
-            backToCatalog.addEventListener('click', function(e) {
+            // Volver a características desde devoluciones
+            backToFeaturesFromReturns.addEventListener('click', function(e) {
                 e.preventDefault();
-                showSection(document.querySelector('.categories'));
+                showSection(document.querySelector('.features'));
+            });
+            
+            // Cambiar entre pestañas de devoluciones
+            returnsTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabName = this.getAttribute('data-tab');
+                    changeReturnTab(tabName);
+                });
             });
             
             // Enviar formulario de soporte
@@ -2087,14 +2274,41 @@
                 e.preventDefault();
                 alert('Solicitud de soporte enviada correctamente. Nos pondremos en contacto contigo pronto.');
                 supportForm.reset();
-                showSection(document.querySelector('.categories'));
+                showSection(document.querySelector('.features'));
             });
             
             // Enviar formulario de devoluciones
             returnsForm.addEventListener('submit', function(e) {
                 e.preventDefault();
+                
+                // Crear nueva devolución
+                const newReturn = {
+                    id: `DEV-${nextReturnId.toString().padStart(4, '0')}`,
+                    cliente: document.getElementById('return-name').value,
+                    email: document.getElementById('return-email').value,
+                    productos: document.getElementById('return-products').value,
+                    monto: parseFloat(document.getElementById('return-amount').value),
+                    estado: 'pending',
+                    fecha: new Date().toISOString().split('T')[0]
+                };
+                
+                // Agregar a la lista
+                devoluciones.unshift(newReturn);
+                nextReturnId++;
+                
+                // Guardar en localStorage
+                saveReturns();
+                
+                // Mostrar modal de confirmación
                 returnConfirmationModal.classList.add('active');
+                
+                // Reiniciar formulario
                 returnsForm.reset();
+            });
+            
+            // Finalizar compra
+            checkoutBtn.addEventListener('click', function() {
+                checkout();
             });
             
             // Continuar comprando desde el modal
@@ -2113,7 +2327,6 @@
             // Cerrar modal de devolución
             returnModalCloseBtn.addEventListener('click', function() {
                 returnConfirmationModal.classList.remove('active');
-                showSection(document.querySelector('.categories'));
             });
             
             // Inicializar carrito y pedidos
