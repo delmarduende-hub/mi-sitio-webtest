@@ -105,6 +105,7 @@
         
         nav ul li {
             margin-left: 25px;
+            position: relative;
         }
         
         nav ul li a {
@@ -113,6 +114,7 @@
             font-weight: 500;
             transition: color 0.3s;
             position: relative;
+            cursor: pointer;
         }
         
         nav ul li a::after {
@@ -165,6 +167,56 @@
             display: flex;
             justify-content: center;
             align-items: center;
+        }
+        
+        /* Menú desplegable de catálogos */
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(30, 39, 46, 0.95);
+            min-width: 250px;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        .dropdown-item {
+            display: block;
+            padding: 12px 15px;
+            color: var(--light);
+            text-decoration: none;
+            border-radius: 6px;
+            margin-bottom: 5px;
+            transition: all 0.3s;
+        }
+        
+        .dropdown-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--secondary);
+        }
+        
+        .dropdown-item:last-child {
+            margin-top: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 15px;
+            color: var(--warning);
+        }
+        
+        .dropdown-item:last-child:hover {
+            background: rgba(220, 20, 60, 0.2);
         }
         
         /* Hero Section */
@@ -631,7 +683,7 @@
             margin-bottom: 12px;
         }
         
-        .summary-row total {
+        .summary-row.total {
             font-weight: bold;
             font-size: 1.2rem;
             border-top: 2px solid rgba(255, 255, 255, 0.2);
@@ -814,6 +866,55 @@
         .form-group textarea {
             min-height: 120px;
             resize: vertical;
+        }
+        
+        /* Sección de Devoluciones */
+        .returns-section {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            margin: 40px 0;
+            backdrop-filter: blur(10px);
+            display: none;
+        }
+        
+        .returns-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        .returns-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .returns-section h2 {
+            color: var(--light);
+            font-size: 2rem;
+        }
+        
+        .back-to-catalog {
+            display: flex;
+            align-items: center;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .back-to-catalog i {
+            margin-right: 8px;
+        }
+        
+        .back-to-catalog:hover {
+            text-decoration: underline;
+        }
+        
+        .returns-form {
+            display: grid;
+            gap: 20px;
         }
         
         /* Colecciones por temporada */
@@ -1008,6 +1109,11 @@
                 margin: 8px 15px;
             }
             
+            .dropdown-content {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
             .hero h1 {
                 font-size: 2.5rem;
             }
@@ -1050,7 +1156,7 @@
                 margin: 10px 0;
             }
             
-            .cart-header, .orders-header, .support-header {
+            .cart-header, .orders-header, .support-header, .returns-header {
                 flex-direction: column;
                 gap: 15px;
                 text-align: center;
@@ -1083,7 +1189,16 @@
             <nav>
                 <ul>
                     <li><a href="#">Inicio</a></li>
-                    <li><a href="#">Catálogos</a></li>
+                    <li class="dropdown">
+                        <a href="#">Catálogos</a>
+                        <div class="dropdown-content">
+                            <a href="#" class="dropdown-item" data-category="accesorios">Accesorios</a>
+                            <a href="#" class="dropdown-item" data-category="ropa">Ropa</a>
+                            <a href="#" class="dropdown-item" data-category="calzado">Calzado</a>
+                            <a href="#" class="dropdown-item" data-category="colecciones">Colecciones Especiales</a>
+                            <a href="#" class="dropdown-item" id="returns-btn">Devoluciones</a>
+                        </div>
+                    </li>
                     <li><a href="#">Ofertas</a></li>
                     <li><a href="#">Contacto</a></li>
                     <li>
@@ -1263,6 +1378,66 @@
         </div>
     </section>
 
+    <!-- Sección de Devoluciones -->
+    <section class="returns-section" id="returns-section">
+        <div class="container">
+            <div class="returns-header">
+                <h2>Solicitud de Devolución</h2>
+                <a href="#" class="back-to-catalog" id="back-to-catalog">
+                    <i class="fas fa-arrow-left"></i> Volver al catálogo
+                </a>
+            </div>
+            
+            <form class="returns-form" id="returns-form">
+                <div class="form-group">
+                    <label for="return-order-id">Número de pedido *</label>
+                    <input type="text" id="return-order-id" required placeholder="Ej: #1001">
+                </div>
+                
+                <div class="form-group">
+                    <label for="return-name">Nombre completo *</label>
+                    <input type="text" id="return-name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="return-email">Correo electrónico *</label>
+                    <input type="email" id="return-email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="return-phone">Teléfono de contacto *</label>
+                    <input type="tel" id="return-phone" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="return-products">Productos a devolver *</label>
+                    <textarea id="return-products" required placeholder="Indica los productos, tallas y cantidades que deseas devolver"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="return-reason">Motivo de la devolución *</label>
+                    <select id="return-reason" required>
+                        <option value="">Selecciona un motivo</option>
+                        <option value="talla-incorrecta">Talla incorrecta</option>
+                        <option value="color-diferente">Color diferente al esperado</option>
+                        <option value="defecto-producto">Producto defectuoso</option>
+                        <option value="arrepentimiento">Arrepentimiento de compra</option>
+                        <option value="otro">Otro motivo</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="return-details">Detalles adicionales</label>
+                    <textarea id="return-details" placeholder="Proporciona más detalles sobre el motivo de tu devolución"></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-warning">
+                    <i class="fas fa-undo"></i> Solicitar Devolución
+                </button>
+            </form>
+        </div>
+    </section>
+
     <!-- Colecciones por temporada -->
     <section class="container" id="collections">
         <h2 class="section-title">Nuestras Colecciones por Temporada</h2>
@@ -1317,6 +1492,19 @@
         </div>
     </div>
 
+    <!-- Modal de confirmación de devolución -->
+    <div class="modal" id="return-confirmation-modal">
+        <div class="modal-content">
+            <h3>¡Solicitud de devolución recibida!</h3>
+            <p>Hemos recibido tu solicitud de devolución. Nos pondremos en contacto contigo en un plazo máximo de 48 horas para gestionar el proceso.</p>
+            <div class="modal-buttons">
+                <button class="btn" id="return-modal-close-btn">
+                    <i class="fas fa-check"></i> Aceptar
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -1340,10 +1528,10 @@
                 </div>
                 
                 <div class="footer-section">
-                    <h3>Horario</h3>
-                    <p>Lunes a Viernes: 9:00 - 20:00</p>
-                    <p>Sábados: 10:00 - 22:00</p>
-                    <p>Domingos: 11:00 - 18:00</p>
+                    <h3>Políticas</h3>
+                    <p><a href="#" style="color: #dfe6e9; text-decoration: none;">Términos y condiciones</a></p>
+                    <p><a href="#" style="color: #dfe6e9; text-decoration: none;">Política de privacidad</a></p>
+                    <p><a href="#" style="color: #dfe6e9; text-decoration: none;">Política de devoluciones</a></p>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -1360,14 +1548,14 @@
                 { id: 2, name: "Anillo Estrella Nocturna", price: 39.99, img: "https://images.unsplash.com/photo-1611010344444-5f9e4d86a6e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=776&q=80" },
                 { id: 3, name: "Bolso Noche Estrellada", price: 79.99, img: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" },
                 { id: 4, name: "Gafas de Sol Nocturnas", price: 59.99, img: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1035&q=80" },
-                { id: 5, name: "Pulsera Constelación", price: 34.99, img: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" },
+                { id: 5, name: "Pulsera Constelación", price: 34.99, img: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwa90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" },
                 { id: 6, name: "Reloj Luna Creciente", price: 89.99, img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=799&q=80" }
             ],
             ropa: [
                 { id: 7, name: "Vestido Noche Estrellada", price: 89.99, img: "https://images.unsplash.com/photo-1529903384028-929ae5dccdf1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" },
                 { id: 8, name: "Abrigo Luna Llena", price: 129.99, img: "https://images.unsplash.com/photo-1551028719-00167b16eac5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80" },
                 { id: 9, name: "Camiseta Eclipse", price: 39.99, img: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=580&q=80" },
-                { id: 10, name: "Falda Galaxia", price: 59.99, img: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=464&q=80" },
+                { id: 10, name: "Falda Galaxia", price: 59.99, img: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=c crop&w=464&q=80" },
                 { id: 11, name: "Jeans Crepúsculo", price: 69.99, img: "https://images.unsplash.com/photo-1542272604-787c3835535d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=826&q=80" },
                 { id: 12, name: "Chaqueta Medianoche", price: 99.99, img: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=436&q=80" }
             ],
@@ -1376,7 +1564,7 @@
                 { id: 14, name: "Zapatos Estrella Fugaz", price: 89.99, img: "https://images.unsplash.com/photo-1560343090-f0409e92791a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=464&q=80" },
                 { id: 15, name: "Sandalias Atardecer", price: 59.99, img: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=580&q=80" },
                 { id: 16, name: "Deportivas Cielo Nocturno", price: 79.99, img: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=464&q=80" },
-                { id: 17, name: "Zapatillas Aurora Boreal", price: 69.99, img: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=c crop&w=387&q=80" },
+                { id: 17, name: "Zapatillas Aurora Boreal", price: 69.99, img: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80" },
                 { id: 18, name: "Botines Eclipse Solar", price: 99.99, img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80" }
             ],
             colecciones: [
@@ -1406,6 +1594,7 @@
             const cartSection = document.getElementById('cart-section');
             const ordersSection = document.getElementById('orders-section');
             const supportSection = document.getElementById('support-section');
+            const returnsSection = document.getElementById('returns-section');
             const viewCartFeature = document.getElementById('view-cart-feature');
             const securePaymentFeature = document.getElementById('secure-payment-feature');
             const supportFeature = document.getElementById('support-feature');
@@ -1413,12 +1602,18 @@
             const backToShopping = document.getElementById('back-to-shopping');
             const backToFeaturesFromOrders = document.getElementById('back-to-features-from-orders');
             const backToFeaturesFromSupport = document.getElementById('back-to-features-from-support');
+            const backToCatalog = document.getElementById('back-to-catalog');
             const ordersList = document.getElementById('orders-list');
             const orderEmpty = document.getElementById('order-empty');
             const supportForm = document.getElementById('support-form');
+            const returnsForm = document.getElementById('returns-form');
+            const returnsBtn = document.getElementById('returns-btn');
+            const dropdownItems = document.querySelectorAll('.dropdown-item');
             const confirmationModal = document.getElementById('confirmation-modal');
+            const returnConfirmationModal = document.getElementById('return-confirmation-modal');
             const continueShoppingBtn = document.getElementById('continue-shopping-btn');
             const viewOrdersBtn = document.getElementById('view-orders-btn');
+            const returnModalCloseBtn = document.getElementById('return-modal-close-btn');
             
             let cart = [];
             let itemCount = 0;
@@ -1428,7 +1623,7 @@
             // Función para mostrar/ocultar secciones
             function showSection(sectionToShow) {
                 // Ocultar todas las secciones principales
-                document.querySelectorAll('.categories, .products-section, .cart-section, #collections, .orders-section, .support-section').forEach(section => {
+                document.querySelectorAll('.categories, .products-section, .cart-section, #collections, .orders-section, .support-section, .returns-section').forEach(section => {
                     section.style.display = 'none';
                 });
                 
@@ -1816,6 +2011,31 @@
                 });
             });
             
+            // Mostrar categorías desde el menú desplegable
+            dropdownItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const category = this.getAttribute('data-category');
+                    if (category) {
+                        // Remover clase active de todos los items
+                        categoryItems.forEach(i => i.classList.remove('active'));
+                        
+                        // Añadir clase active al item correspondiente
+                        document.querySelector(`.category-item[data-category="${category}"]`).classList.add('active');
+                        
+                        renderProducts(category);
+                        showSection(productsSection);
+                    }
+                });
+            });
+            
+            // Mostrar sección de devoluciones
+            returnsBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                showSection(returnsSection);
+            });
+            
             // Mostrar carrito al hacer clic en "Productos al Carrito"
             viewCartFeature.addEventListener('click', function() {
                 showSection(cartSection);
@@ -1856,12 +2076,25 @@
                 showSection(document.querySelector('.categories'));
             });
             
+            // Volver al catálogo desde devoluciones
+            backToCatalog.addEventListener('click', function(e) {
+                e.preventDefault();
+                showSection(document.querySelector('.categories'));
+            });
+            
             // Enviar formulario de soporte
             supportForm.addEventListener('submit', function(e) {
                 e.preventDefault();
                 alert('Solicitud de soporte enviada correctamente. Nos pondremos en contacto contigo pronto.');
                 supportForm.reset();
                 showSection(document.querySelector('.categories'));
+            });
+            
+            // Enviar formulario de devoluciones
+            returnsForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                returnConfirmationModal.classList.add('active');
+                returnsForm.reset();
             });
             
             // Continuar comprando desde el modal
@@ -1877,9 +2110,10 @@
                 showSection(ordersSection);
             });
             
-            // Finalizar compra
-            checkoutBtn.addEventListener('click', function() {
-                checkout();
+            // Cerrar modal de devolución
+            returnModalCloseBtn.addEventListener('click', function() {
+                returnConfirmationModal.classList.remove('active');
+                showSection(document.querySelector('.categories'));
             });
             
             // Inicializar carrito y pedidos
