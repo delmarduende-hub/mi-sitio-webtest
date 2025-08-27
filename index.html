@@ -78,6 +78,7 @@
             font-weight: bold;
             display: flex;
             align-items: center;
+            cursor: pointer;
         }
         
         .logo i {
@@ -564,6 +565,11 @@
             text-align: center;
             padding: 30px;
             color: #dfe6e9;
+            display: none;
+        }
+        
+        .cart-empty.active {
+            display: block;
         }
         
         .cart-empty i {
@@ -622,6 +628,7 @@
             display: flex;
             align-items: center;
             margin-top: 10px;
+            gap: 10px;
         }
         
         .quantity-btn {
@@ -638,7 +645,6 @@
         .quantity-input {
             width: 40px;
             text-align: center;
-            margin: 0 10px;
             padding: 5px;
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 4px;
@@ -675,6 +681,11 @@
             background-color: rgba(255, 255, 255, 0.1);
             padding: 20px;
             border-radius: 8px;
+            display: none;
+        }
+        
+        .cart-summary.active {
+            display: block;
         }
         
         .summary-row {
@@ -955,6 +966,11 @@
             background: rgba(255, 255, 255, 0.05);
             border-radius: 10px;
             overflow: hidden;
+            display: none;
+        }
+        
+        .returns-table.active {
+            display: table;
         }
         
         .returns-table th,
@@ -1004,12 +1020,69 @@
             text-align: center;
             padding: 40px;
             color: #dfe6e9;
+            display: none;
+        }
+        
+        .returns-empty.active {
+            display: block;
         }
         
         .returns-empty i {
             font-size: 3rem;
             margin-bottom: 15px;
             color: rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Sección de Temporadas */
+        .seasons-section {
+            text-align: center;
+            margin: 60px 0;
+        }
+        
+        .seasons-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: var(--light);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .seasons-section h2::after {
+            content: "";
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+        
+        .season-list {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .season-item {
+            background: linear-gradient(135deg, rgba(253, 121, 168, 0.2), rgba(116, 185, 255, 0.2));
+            color: white;
+            padding: 20px 40px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            backdrop-filter: blur(5px);
+        }
+        
+        .season-item:hover, .season-item.active {
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.3);
         }
         
         /* Colecciones por temporada */
@@ -1027,6 +1100,7 @@
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s, box-shadow 0.3s;
             backdrop-filter: blur(10px);
+            cursor: pointer;
         }
         
         .season-card:hover {
@@ -1217,12 +1291,12 @@
                 flex-direction: column;
             }
             
-            .category-list {
+            .category-list, .season-list {
                 flex-direction: column;
                 align-items: center;
             }
             
-            .category-item {
+            .category-item, .season-item {
                 width: 80%;
             }
             
@@ -1286,13 +1360,13 @@
     <!-- Header -->
     <header>
         <div class="container header-content">
-            <div class="logo">
+            <div class="logo" id="logo-home">
                 <i class="fas fa-moon"></i>
                 <span>La Calle de Luna</span>
             </div>
             <nav>
                 <ul>
-                    <li><a href="#">Inicio</a></li>
+                    <li><a href="#" id="nav-inicio">Inicio</a></li>
                     <li class="dropdown">
                         <a href="#">Catálogos</a>
                         <div class="dropdown-content">
@@ -1303,7 +1377,15 @@
                             <a href="#" class="dropdown-item" id="returns-btn">Devoluciones</a>
                         </div>
                     </li>
-                    <li><a href="#">Ofertas</a></li>
+                    <li class="dropdown">
+                        <a href="#">Ofertas</a>
+                        <div class="dropdown-content">
+                            <a href="#" class="dropdown-item" data-season="verano">Verano</a>
+                            <a href="#" class="dropdown-item" data-season="invierno">Invierno</a>
+                            <a href="#" class="dropdown-item" data-season="primavera">Primavera</a>
+                            <a href="#" class="dropdown-item" data-season="otono">Otoño</a>
+                        </div>
+                    </li>
                     <li><a href="#">Contacto</a></li>
                     <li>
                         <div class="cart-icon" id="header-cart">
@@ -1374,6 +1456,19 @@
         </div>
     </section>
 
+    <!-- Sección de Temporadas -->
+    <section class="seasons-section" id="seasons-section">
+        <div class="container">
+            <h2>Nuestras Temporadas</h2>
+            <div class="season-list">
+                <div class="season-item active" data-season="verano">Verano</div>
+                <div class="season-item" data-season="invierno">Invierno</div>
+                <div class="season-item" data-season="primavera">Primavera</div>
+                <div class="season-item" data-season="otono">Otoño</div>
+            </div>
+        </div>
+    </section>
+
     <!-- Sección del Carrito de Compras -->
     <section class="cart-section" id="cart-section">
         <div class="container">
@@ -1392,7 +1487,7 @@
                 </div>
             </div>
             
-            <div class="cart-summary" id="cart-summary" style="display: none;">
+            <div class="cart-summary" id="cart-summary">
                 <div class="summary-row">
                     <span>Subtotal:</span>
                     <span id="cart-subtotal">$0.00</span>
@@ -1554,7 +1649,7 @@
             
             <div class="returns-content" id="list-tab">
                 <div class="returns-list" id="returns-list">
-                    <table class="returns-table">
+                    <table class="returns-table" id="returns-table">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -1584,7 +1679,7 @@
     <section class="container" id="collections">
         <h2 class="section-title">Nuestras Colecciones por Temporada</h2>
         <div class="season-grid">
-            <div class="season-card">
+            <div class="season-card" data-season="verano">
                 <div class="season-img verano"><span>Verano</span></div>
                 <div class="season-info">
                     <h3>Colección Verano</h3>
@@ -1592,7 +1687,7 @@
                 </div>
             </div>
             
-            <div class="season-card">
+            <div class="season-card" data-season="invierno">
                 <div class="season-img invierno"><span>Invierno</span></div>
                 <div class="season-info">
                     <h3>Colección Invierno</h3>
@@ -1600,7 +1695,7 @@
                 </div>
             </div>
             
-            <div class="season-card">
+            <div class="season-card" data-season="primavera">
                 <div class="season-img primavera"><span>Primavera</span></div>
                 <div class="season-info">
                     <h3>Colección Primavera</h3>
@@ -1608,7 +1703,7 @@
                 </div>
             </div>
             
-            <div class="season-card">
+            <div class="season-card" data-season="otono">
                 <div class="season-img otono"><span>Otoño</span></div>
                 <div class="season-info">
                     <h3>Colección Otoño</h3>
@@ -1691,7 +1786,7 @@
                 { id: 3, name: "Bolso Noche Estrellada", price: 79.99, img: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" },
                 { id: 4, name: "Gafas de Sol Nocturnas", price: 59.99, img: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1035&q=80" },
                 { id: 5, name: "Pulsera Constelación", price: 34.99, img: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwa90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" },
-                { id: 6, name: "Reloj Luna Creciente", price: 89.99, img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=799&q=80" }
+                { id: 6, name: "Reloj Luna Creciente", price: 89.99, img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=c crop&w=799&q=80" }
             ],
             ropa: [
                 { id: 7, name: "Vestido Noche Estrellada", price: 89.99, img: "https://images.unsplash.com/photo-1529903384028-929ae5dccdf1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" },
@@ -1699,19 +1794,19 @@
                 { id: 9, name: "Camiseta Eclipse", price: 39.99, img: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=580&q=80" },
                 { id: 10, name: "Falda Galaxia", price: 59.99, img: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=464&q=80" },
                 { id: 11, name: "Jeans Crepúsculo", price: 69.99, img: "https://images.unsplash.com/photo-1542272604-787c3835535d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=826&q=80" },
-                { id: 12, name: "Chaqueta Medianoche", price: 99.99, img: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=c crop&w=436&q=80" }
+                { id: 12, name: "Chaqueta Medianoche", price: 99.99, img: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=436&q=80" }
             ],
             calzado: [
                 { id: 13, name: "Botas Luna Nueva", price: 119.99, img: "https://images.unsplash.com/photo-1608256246200-53e635b5b65f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80" },
                 { id: 14, name: "Zapatos Estrella Fugaz", price: 89.99, img: "https://images.unsplash.com/photo-1560343090-f0409e92791a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=464&q=80" },
                 { id: 15, name: "Sandalias Atardecer", price: 59.99, img: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=580&q=80" },
-                { id: 16, name: "Deportivas Cielo Nocturno", price: 79.99, img: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=c crop&w=464&q=80" },
+                { id: 16, name: "Deportivas Cielo Nocturno", price: 79.99, img: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=464&q=80" },
                 { id: 17, name: "Zapatillas Aurora Boreal", price: 69.99, img: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80" },
                 { id: 18, name: "Botines Eclipse Solar", price: 99.99, img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80" }
             ],
             colecciones: [
                 { id: 19, name: "Conjunto Edición Limitada Luna", price: 199.99, img: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80" },
-                { id: 20, name: "Colección Firmada Constelaciones", price: 299.99, img: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80" },
+                { id: 20, name: "Colección Firmada Constelaciones", price: 299.99, img: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=c crop&w=870&q=80" },
                 { id: 21, name: "Pack Premium Galaxia", price: 249.99, img: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" },
                 { id: 22, name: "Set Exclusivo Vía Láctea", price: 179.99, img: "https://images.unsplash.com/photo-1588099768531-a72d4a198538?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80" },
                 { id: 23, name: "Pack Estelar Nocturno", price: 159.99, img: "https://images.unsplash.com/photo-1591369822096-ffd140ec948a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80" },
@@ -1766,7 +1861,9 @@
             const cartTotal = document.getElementById('cart-total');
             const checkoutBtn = document.getElementById('checkout-btn');
             const categoryItems = document.querySelectorAll('.category-item');
+            const seasonItems = document.querySelectorAll('.season-item');
             const productsSection = document.getElementById('products-section');
+            const seasonsSection = document.getElementById('seasons-section');
             const cartSection = document.getElementById('cart-section');
             const ordersSection = document.getElementById('orders-section');
             const supportSection = document.getElementById('support-section');
@@ -1795,6 +1892,10 @@
             const returnsContents = document.querySelectorAll('.returns-content');
             const returnsTableBody = document.getElementById('returns-table-body');
             const returnsEmpty = document.getElementById('returns-empty');
+            const returnsTable = document.getElementById('returns-table');
+            const navInicio = document.getElementById('nav-inicio');
+            const logoHome = document.getElementById('logo-home');
+            const seasonCards = document.querySelectorAll('.season-card');
             
             let cart = [];
             let itemCount = 0;
@@ -1804,7 +1905,7 @@
             // Función para mostrar/ocultar secciones
             function showSection(sectionToShow) {
                 // Ocultar todas las secciones principales
-                document.querySelectorAll('.categories, .products-section, .cart-section, #collections, .orders-section, .support-section, .returns-section').forEach(section => {
+                document.querySelectorAll('.categories, .products-section, .seasons-section, .cart-section, #collections, .orders-section, .support-section, .returns-section').forEach(section => {
                     section.style.display = 'none';
                 });
                 
@@ -1819,6 +1920,25 @@
                         behavior: 'smooth'
                     });
                 }
+            }
+            
+            // Función para regresar al inicio
+            function goToHome() {
+                // Ocultar todas las secciones
+                document.querySelectorAll('.products-section, .seasons-section, .cart-section, #collections, .orders-section, .support-section, .returns-section').forEach(section => {
+                    section.style.display = 'none';
+                });
+                
+                // Mostrar secciones principales
+                document.querySelector('.categories').style.display = 'block';
+                document.getElementById('features').style.display = 'block';
+                document.getElementById('collections').style.display = 'block';
+                
+                // Desplazarse al inicio
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
             }
             
             // Función para cambiar entre pestañas de devoluciones
@@ -1852,13 +1972,13 @@
                 returnsTableBody.innerHTML = '';
                 
                 if (devoluciones.length === 0) {
-                    returnsEmpty.style.display = 'block';
-                    document.querySelector('.returns-table').style.display = 'none';
+                    returnsEmpty.classList.add('active');
+                    returnsTable.classList.remove('active');
                     return;
                 }
                 
-                returnsEmpty.style.display = 'none';
-                document.querySelector('.returns-table').style.display = 'table';
+                returnsEmpty.classList.remove('active');
+                returnsTable.classList.add('active');
                 
                 devoluciones.forEach(dev => {
                     const row = document.createElement('tr');
@@ -1961,11 +2081,11 @@
                 
                 // Mostrar/ocultar mensaje de carrito vacío
                 if (cart.length === 0) {
-                    cartEmpty.style.display = 'block';
-                    cartSummary.style.display = 'none';
+                    cartEmpty.classList.add('active');
+                    cartSummary.classList.remove('active');
                 } else {
-                    cartEmpty.style.display = 'none';
-                    cartSummary.style.display = 'block';
+                    cartEmpty.classList.remove('active');
+                    cartSummary.classList.add('active');
                 }
                 
                 // Calcular totales
@@ -1988,9 +2108,11 @@
                 cartItemsContainer.innerHTML = '';
                 
                 if (cart.length === 0) {
-                    cartItemsContainer.appendChild(cartEmpty);
+                    cartEmpty.classList.add('active');
                     return;
                 }
+                
+                cartEmpty.classList.remove('active');
                 
                 cart.forEach(item => {
                     const cartItem = document.createElement('div');
@@ -2056,9 +2178,11 @@
                 ordersList.innerHTML = '';
                 
                 if (orders.length === 0) {
-                    ordersList.appendChild(orderEmpty);
+                    orderEmpty.style.display = 'block';
                     return;
                 }
+                
+                orderEmpty.style.display = 'none';
                 
                 orders.forEach(order => {
                     const orderItem = document.createElement('div');
@@ -2272,12 +2396,29 @@
                 });
             });
             
+            // Mostrar temporadas al hacer clic en items de temporada
+            seasonItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // Remover clase active de todos los items
+                    seasonItems.forEach(i => i.classList.remove('active'));
+                    
+                    // Añadir clase active al item clickeado
+                    this.classList.add('active');
+                    
+                    const season = this.getAttribute('data-season');
+                    // Aquí puedes implementar la lógica para mostrar productos de temporada
+                    alert(`Mostrando productos de la temporada: ${season}`);
+                });
+            });
+            
             // Mostrar categorías desde el menú desplegable
             dropdownItems.forEach(item => {
                 item.addEventListener('click', function(e) {
                     e.preventDefault();
                     
                     const category = this.getAttribute('data-category');
+                    const season = this.getAttribute('data-season');
+                    
                     if (category) {
                         // Remover clase active de todos los items
                         categoryItems.forEach(i => i.classList.remove('active'));
@@ -2287,6 +2428,15 @@
                         
                         renderProducts(category);
                         showSection(productsSection);
+                    } else if (season) {
+                        // Remover clase active de todos los items
+                        seasonItems.forEach(i => i.classList.remove('active'));
+                        
+                        // Añadir clase active al item correspondiente
+                        document.querySelector(`.season-item[data-season="${season}"]`).classList.add('active');
+                        
+                        // Aquí puedes implementar la lógica para mostrar productos de temporada
+                        alert(`Mostrando productos de la temporada: ${season}`);
                     }
                 });
             });
@@ -2327,25 +2477,36 @@
             // Volver a comprar desde el carrito
             backToShopping.addEventListener('click', function(e) {
                 e.preventDefault();
-                showSection(document.querySelector('.categories'));
+                goToHome();
             });
             
             // Volver a características desde pedidos
             backToFeaturesFromOrders.addEventListener('click', function(e) {
                 e.preventDefault();
-                showSection(document.querySelector('.categories'));
+                goToHome();
             });
             
             // Volver a características desde soporte
             backToFeaturesFromSupport.addEventListener('click', function(e) {
                 e.preventDefault();
-                showSection(document.querySelector('.categories'));
+                goToHome();
             });
             
             // Volver al catálogo desde devoluciones
             backToCatalog.addEventListener('click', function(e) {
                 e.preventDefault();
-                showSection(document.querySelector('.categories'));
+                goToHome();
+            });
+            
+            // Ir al inicio desde el logo o enlace de inicio
+            logoHome.addEventListener('click', function(e) {
+                e.preventDefault();
+                goToHome();
+            });
+            
+            navInicio.addEventListener('click', function(e) {
+                e.preventDefault();
+                goToHome();
             });
             
             // Enviar formulario de soporte
@@ -2353,7 +2514,7 @@
                 e.preventDefault();
                 alert('Solicitud de soporte enviada correctamente. Nos pondremos en contacto contigo pronto.');
                 supportForm.reset();
-                showSection(document.querySelector('.categories'));
+                goToHome();
             });
             
             // Enviar formulario de devoluciones
@@ -2396,7 +2557,7 @@
             // Continuar comprando desde el modal
             continueShoppingBtn.addEventListener('click', function() {
                 confirmationModal.classList.remove('active');
-                showSection(document.querySelector('.categories'));
+                goToHome();
             });
             
             // Ver pedidos desde el modal
@@ -2409,7 +2570,7 @@
             // Cerrar modal de devolución
             returnModalCloseBtn.addEventListener('click', function() {
                 returnConfirmationModal.classList.remove('active');
-                showSection(document.querySelector('.categories'));
+                goToHome();
             });
             
             // Inicializar carrito y pedidos
@@ -2417,8 +2578,8 @@
             renderCartItems();
             renderOrders();
             
-            // Inicialmente mostrar categorías
-            showSection(document.querySelector('.categories'));
+            // Inicialmente mostrar secciones principales
+            goToHome();
         });
     </script>
 </body>
