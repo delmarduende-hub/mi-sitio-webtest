@@ -460,7 +460,7 @@
         }
         
         .product {
-            background: rgba(255, 255, 255, 极速赛车开奖直播记录
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
@@ -555,10 +555,15 @@
         
         .back-to-shopping i {
             margin-right: 8px;
+            transition: transform 0.3s;
         }
         
         .back-to-shopping:hover {
             text-decoration: underline;
+        }
+        
+        .back-to-shopping:hover i {
+            transform: translateX(-5px);
         }
         
         .cart-empty {
@@ -632,7 +637,7 @@
         }
         
         .quantity-btn {
-            background: rgba(255, 极速赛车开奖直播记录
+            background: rgba(255, 255, 255, 0.1);
             border: none;
             width: 30px;
             height: 30px;
@@ -640,6 +645,11 @@
             cursor: pointer;
             font-weight: bold;
             color: var(--light);
+            transition: background 0.3s;
+        }
+        
+        .quantity-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
         }
         
         .quantity-input {
@@ -664,7 +674,7 @@
             font-weight: bold;
             color: var(--primary);
             margin-left: 15px;
-            min-width: 极速赛车开奖直播记录
+            min-width: 100px;
             text-align: right;
         }
         
@@ -675,6 +685,11 @@
             cursor: pointer;
             margin-left: 15px;
             font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+        
+        .remove-item:hover {
+            transform: scale(1.2);
         }
         
         .cart-summary {
@@ -699,7 +714,7 @@
             font-size: 1.2rem;
             border-top: 2px solid rgba(255, 255, 255, 0.2);
             padding-top: 15px;
-           极速赛车开奖直播记录
+            margin-top: 15px;
             color: var(--primary);
         }
         
@@ -715,7 +730,7 @@
             background: rgba(255, 255, 255, 0.1);
             padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 8px 极速赛车开奖直播记录
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
             margin: 40px 0;
             backdrop-filter: blur(10px);
             display: none;
@@ -748,16 +763,84 @@
         
         .back-to-features i {
             margin-right: 8px;
+            transition: transform 0.3s;
         }
         
         .back-to-features:hover {
             text-decoration: underline;
         }
         
+        .back-to-features:hover i {
+            transform: translateX(-5px);
+        }
+        
         .orders-list {
             margin-bottom: 25px;
         }
         
+        .order-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: transform 0.3s;
+        }
+        
+        .order-item:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .order-id {
+            font-weight: bold;
+            color: var(--accent);
+        }
+        
+        .order-date {
+            color: #dfe6e9;
+            font-size: 0.9rem;
+        }
+        
+        .order-total {
+            font-weight: bold;
+            color: var(--secondary);
+            font-size: 1.2rem;
+        }
+        
+        .order-details {
+            display: none;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .order-details.active {
+            display: block;
+        }
+        
+        .order-products {
+            margin-bottom: 15px;
+        }
+        
+        .order-product {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .order-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        /* Tabla de pedidos */
         .orders-table {
             width: 100%;
             border-collapse: collapse;
@@ -765,11 +848,6 @@
             background: rgba(255, 255, 255, 0.05);
             border-radius: 10px;
             overflow: hidden;
-            display: none;
-        }
-        
-        .orders-table.active {
-            display: table;
         }
         
         .orders-table th,
@@ -793,18 +871,35 @@
             background: rgba(255, 255, 255, 0.05);
         }
         
-        .order-empty {
+        .order-status {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .status-pending {
+            background: rgba(253, 203, 110, 0.2);
+            color: var(--warning);
+        }
+        
+        .status-approved {
+            background: rgba(0, 184, 148, 0.2);
+            color: var(--success);
+        }
+        
+        .status-rejected {
+            background: rgba(214, 48, 49, 0.2);
+            color: var(--danger);
+        }
+        
+        .orders-empty {
             text-align: center;
             padding: 40px;
             color: #dfe6e9;
-            display: none;
         }
         
-        .order-empty.active {
-            display: block;
-        }
-        
-        .order-empty i {
+        .orders-empty i {
             font-size: 3rem;
             margin-bottom: 15px;
             color: rgba(255, 255, 255, 0.3);
@@ -834,7 +929,7 @@
         }
         
         .support-section h2 {
-           极速赛车开奖直播记录
+            color: var(--light);
             font-size: 2rem;
         }
         
@@ -907,16 +1002,21 @@
         
         .back-to-catalog i {
             margin-right: 8px;
+            transition: transform 0.3s;
         }
         
         .back-to-catalog:hover {
             text-decoration: underline;
         }
         
+        .back-to-catalog:hover i {
+            transform: translateX(-5px);
+        }
+        
         .returns-tabs {
             display: flex;
             margin-bottom: 25px;
-            border-bottom: 2px solid rgba极速赛车开奖直播记录
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
         }
         
         .returns-tab {
@@ -991,21 +1091,6 @@
             font-weight: bold;
         }
         
-        .status-pending {
-            background: rgba(253, 203, 110, 0.2);
-            color: var(--warning);
-        }
-        
-        .status-approved {
-            background: rgba(0, 184, 148, 0.2);
-            color: var(--success);
-        }
-        
-        .status-rejected {
-            background: rgba(214, 48, 49, 0.2);
-            color: var(--danger);
-        }
-        
         .returns-empty {
             text-align: center;
             padding: 40px;
@@ -1070,7 +1155,7 @@
         
         .season-item:hover, .season-item.active {
             background: linear-gradient(135deg, var(--secondary), var(--accent));
-            transform: translate极速赛车开奖直播记录
+            transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
             border-color: rgba(255, 255, 255, 0.3);
         }
@@ -1078,7 +1163,7 @@
         /* Colecciones por temporada */
         .season-grid {
             display: grid;
-            grid-template-column极速赛车开奖直播记录
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 30px;
             margin-bottom: 50px;
         }
@@ -1118,7 +1203,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-           极速赛车开奖直播记录
+            background: rgba(0, 0, 0, 0.3);
         }
         
         .season-img span {
@@ -1126,7 +1211,7 @@
             z-index: 2;
         }
         
-        .verano { background: linear-gradient(to right, #ff9a9e, #fad极速赛车开奖直播记录 }
+        .verano { background: linear-gradient(to right, #ff9a9e, #fad0c4); }
         .invierno { background: linear-gradient(to right, #a1c4fd, #c2e9fb); }
         .primavera { background: linear-gradient(to right, #84fab0, #8fd3f4); }
         .otono { background: linear-gradient(to right, #ffecd2, #fcb69f); }
@@ -1168,13 +1253,13 @@
             padding-bottom: 10px;
         }
         
-极速赛车开奖直播记录
+        .footer-section h3::after {
             content: "";
             position: absolute;
             bottom: 0;
             left: 0;
             width: 50px;
-           极速赛车开奖直播记录
+            height: 3px;
             background-color: var(--secondary);
             border-radius: 2px;
         }
@@ -1251,7 +1336,7 @@
             margin-top: 25px;
         }
         
-        /* Modal de datos del cliente */
+        /* Modal de datos de cliente */
         .customer-form {
             display: grid;
             gap: 20px;
@@ -1328,7 +1413,21 @@
                 text-align: center;
             }
             
-            .orders-table, .returns-table {
+            .order-header {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            
+            .order-actions {
+                justify-content: center;
+            }
+            
+            .returns-tabs {
+                flex-direction: column;
+            }
+            
+            .returns-table, .orders-table {
                 display: block;
                 overflow-x: auto;
             }
@@ -1354,7 +1453,7 @@
                         <a href="#">Catálogos</a>
                         <div class="dropdown-content">
                             <a href="#" class="dropdown-item" data-category="accesorios">Accesorios</a>
-                            <a href="#" class="dropdown-item极速赛车开奖直播记录
+                            <a href="#" class="dropdown-item" data-category="ropa">Ropa</a>
                             <a href="#" class="dropdown-item" data-category="calzado">Calzado</a>
                             <a href="#" class="dropdown-item" data-category="colecciones">Colecciones Especiales</a>
                             <a href="#" class="dropdown-item" id="returns-btn">Devoluciones</a>
@@ -1367,12 +1466,12 @@
                             <a href="#" class="dropdown-item" data-season="invierno">Invierno</a>
                             <a href="#" class="dropdown-item" data-season="primavera">Primavera</a>
                             <a href="#" class="dropdown-item" data-season="otono">Otoño</a>
-                        </极速赛车开奖直播记录
+                        </div>
                     </li>
                     <li><a href="#">Contacto</a></li>
                     <li>
                         <div class="cart-icon" id="header-cart">
-                            <i class="fas极速赛车开奖直播记录
+                            <i class="fas fa-shopping-cart"></i>
                             <span class="cart-count">0</span>
                         </div>
                     </li>
@@ -1406,7 +1505,7 @@
             <div class="feature" id="support-feature">
                 <i class="fas fa-headset"></i>
                 <h3>Soporte 24/7</h3>
-                <p>Asistencia personalizada cuando la necesites</极速赛车开奖直播记录
+                <p>Asistencia personalizada cuando la necesites</p>
             </div>
             <div class="feature" id="returns-feature">
                 <i class="fas fa-undo"></i>
@@ -1417,7 +1516,7 @@
     </div>
 
     <!-- Categorías -->
-    <section class="categories" id极速赛车开奖直播记录
+    <section class="categories" id="categories">
         <div class="container">
             <h2>Nuestras Categorías</h2>
             <div class="category-list">
@@ -1439,6 +1538,19 @@
         </div>
     </section>
 
+    <!-- Sección de Temporadas -->
+    <section class="seasons-section" id="seasons-section">
+        <div class="container">
+            <h2>Nuestras Temporadas</h2>
+            <div class="season-list">
+                <div class="season-item active" data-season="verano">Verano</div>
+                <div class="season-item" data-season="invierno">Invierno</div>
+                <div class="season-item" data-season="primavera">Primavera</div>
+                <div class="season-item" data-season="otono">Otoño</div>
+            </div>
+        </div>
+    </section>
+
     <!-- Sección del Carrito de Compras -->
     <section class="cart-section" id="cart-section">
         <div class="container">
@@ -1450,7 +1562,7 @@
             </div>
             
             <div class="cart-items" id="cart-items">
-                <div class="cart-empty active" id="cart-empty">
+                <div class="cart-empty" id="cart-empty">
                     <i class="fas fa-shopping-cart"></i>
                     <h3>Tu carrito está vacío</h3>
                     <p>Agrega algunos productos para comenzar</p>
@@ -1484,17 +1596,11 @@
             <div class="orders-header">
                 <h2>Mis Pedidos</h2>
                 <a href="#" class="back-to-features" id="back-to-features-from-orders">
-                    <极速赛车开奖直播记录
+                    <i class="fas fa-arrow-left"></i> Volver a características
                 </a>
             </div>
             
             <div class="orders-list" id="orders-list">
-                <div class="order-empty active" id="order-empty">
-                    <i class="fas fa-box-open"></i>
-                    <h3>No tienes pedidos realizados</h3>
-                    <p>Realiza tu primera compra para verla aquí</p>
-                </div>
-                
                 <table class="orders-table" id="orders-table">
                     <thead>
                         <tr>
@@ -1511,38 +1617,199 @@
                         <!-- Los pedidos se cargarán dinámicamente aquí -->
                     </tbody>
                 </table>
+                <div class="orders-empty" id="orders-empty">
+                    <i class="fas fa-box-open"></i>
+                    <h3>No tienes pedidos realizados</h3>
+                    <p>Realiza tu primera compra para verla aquí</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Modal de confirmación de pago -->
-    <div class="modal" id="payment-modal">
-        <div class="modal-content">
-            <h3>Completar Compra</h3>
-            <p>Por favor ingresa tus datos para procesar el pedido</p>
+    <!-- Sección de Soporte -->
+    <section class="support-section" id="support-section">
+        <div class="container">
+            <div class="support-header">
+                <h2>Soporte 24/7</h2>
+                <a href="#" class="back-to-features" id="back-to-features-from-support">
+                    <i class="fas fa-arrow-left"></i> Volver a características
+                </a>
+            </div>
             
-            <form class="customer-form" id="customer-form">
+            <form class="support-form" id="support-form">
                 <div class="form-group">
-                    <label for="customer-name">Nombre completo *</label>
-                    <input type="text" id="customer-name" required>
+                    <label for="support-name">Nombre completo</label>
+                    <input type="text" id="support-name" required>
                 </div>
                 
                 <div class="form-group">
-                    <label for="customer-email">Correo electrónico *</label>
-                    <input type="email" id="customer-email" required>
+                    <label for="support-email">Correo electrónico</label>
+                    <input type="email" id="support-email" required>
                 </div>
                 
-                <div class="modal-buttons">
-                    <button type="button" class="btn btn-outline" id="cancel-payment-btn">
-                        <i class="fas fa-times"></i> Cancelar
-                    </button>
-                    <button type="submit" class="btn btn-success">
-                        <i class="fas fa-check"></i> Confirmar Compra
-                    </button>
+                <div class="form-group">
+                    <label for="support-order">Número de pedido (opcional)</label>
+                    <input type="text" id="support-order">
                 </div>
+                
+                <div class="form-group">
+                    <label for="support-subject">Asunto</label>
+                    <select id="support-subject" required>
+                        <option value="">Selecciona un asunto</option>
+                        <option value="problema-pedido">Problema con mi pedido</option>
+                        <option value="devolucion">Solicitud de devolución</option>
+                        <option value="informacion">Información sobre productos</option>
+                        <option value="otros">Otros</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="support-message">Mensaje</label>
+                    <textarea id="support-message" required></textarea>
+                </div>
+                
+                <button type="submit" class="btn">
+                    <i class="fas fa-paper-plane"></i> Enviar solicitud
+                </button>
             </form>
         </div>
-    </div>
+    </section>
+
+    <!-- Sección de Devoluciones -->
+    <section class="returns-section" id="returns-section">
+        <div class="container">
+            <div class="returns-header">
+                <h2>Gestión de Devoluciones</h2>
+                <a href="#" class="back-to-catalog" id="back-to-catalog">
+                    <i class="fas fa-arrow-left"></i> Volver al catálogo
+                </a>
+            </div>
+            
+            <div class="returns-tabs">
+                <div class="returns-tab active" data-tab="request">Solicitar Devolución</div>
+                <div class="returns-tab" data-tab="list">Devoluciones Registradas</div>
+            </div>
+            
+            <div class="returns-content active" id="request-tab">
+                <form class="returns-form" id="returns-form">
+                    <div class="form-group">
+                        <label for="return-order-id">Número de pedido *</label>
+                        <input type="text" id="return-order-id" required placeholder="Ej: #1001">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="return-name">Nombre completo *</label>
+                        <input type="text" id="return-name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="return-email">Correo electrónico *</label>
+                        <input type="email" id="return-email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="return-phone">Teléfono de contacto *</label>
+                        <input type="tel" id="return-phone" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="return-products">Productos a devolver *</label>
+                        <textarea id="return-products" required placeholder="Indica los productos, tallas y cantidades que deseas devolver"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="return-amount">Monto a devolver *</label>
+                        <input type="number" id="return-amount" required placeholder="0.00" step="0.01" min="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="return-reason">Motivo de la devolución *</label>
+                        <select id="return-reason" required>
+                            <option value="">Selecciona un motivo</option>
+                            <option value="talla-incorrecta">Talla incorrecta</option>
+                            <option value="color-diferente">Color diferente al esperado</option>
+                            <option value="defecto-producto">Producto defectuoso</option>
+                            <option value="arrepentimiento">Arrepentimiento de compra</option>
+                            <option value="otro">Otro motivo</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="return-details">Detalles adicionales</label>
+                        <textarea id="return-details" placeholder="Proporciona más detalles sobre el motivo de tu devolución"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-warning">
+                        <i class="fas fa-undo"></i> Solicitar Devolución
+                    </button>
+                </form>
+            </div>
+            
+            <div class="returns-content" id="list-tab">
+                <div class="returns-list" id="returns-list">
+                    <table class="returns-table" id="returns-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Cliente</th>
+                                <th>Email</th>
+                                <th>Productos</th>
+                                <th>Monto</th>
+                                <th>Estado</th>
+                                <th>Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody id="returns-table-body">
+                            <!-- Las devoluciones se cargarán dinámicamente aquí -->
+                        </tbody>
+                    </table>
+                    <div class="returns-empty" id="returns-empty">
+                        <i class="fas fa-box-open"></i>
+                        <h3>No hay devoluciones registradas</h3>
+                        <p>Todas las solicitudes de devolución aparecerán aquí</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Colecciones por temporada -->
+    <section class="container" id="collections">
+        <h2 class="section-title">Nuestras Colecciones por Temporada</h2>
+        <div class="season-grid">
+            <div class="season-card" data-season="verano">
+                <div class="season-img verano"><span>Verano</span></div>
+                <div class="season-info">
+                    <h3>Colección Verano</h3>
+                    <p>Diseños frescos y coloridos para disfrutar del sol</p>
+                </div>
+            </div>
+            
+            <div class="season-card" data-season="invierno">
+                <div class="season-img invierno"><span>Invierno</span></div>
+                <div class="season-info">
+                    <h3>Colección Invierno</h3>
+                    <p>Abrigos y prendas cálidas para los días fríos</p>
+                </div>
+            </div>
+            
+            <div class="season-card" data-season="primavera">
+                <div class="season-img primavera"><span>Primavera</span></div>
+                <div class="season-info">
+                    <h3>Colección Primavera</h3>
+                    <p>Flores y colores pastel para la estación más alegre</p>
+                </div>
+            </div>
+            
+            <div class="season-card" data-season="otono">
+                <div class="season-img otono"><span>Otoño</span></div>
+                <div class="season-info">
+                    <h3>Colección Otoño</h3>
+                    <p>Tonos tierra y prendas perfectas para la transición</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Modal de confirmación -->
     <div class="modal" id="confirmation-modal">
@@ -1560,6 +1827,33 @@
         </div>
     </div>
 
+    <!-- Modal de datos del cliente -->
+    <div class="modal" id="customer-modal">
+        <div class="modal-content">
+            <h3>Completa tus datos para finalizar la compra</h3>
+            <form class="customer-form" id="customer-form">
+                <div class="form-group">
+                    <label for="customer-name">Nombre completo *</label>
+                    <input type="text" id="customer-name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="customer-email">Correo electrónico *</label>
+                    <input type="email" id="customer-email" required>
+                </div>
+                
+                <div class="modal-buttons">
+                    <button type="button" class="btn btn-outline" id="cancel-purchase-btn">
+                        <i class="fas fa-times"></i> Cancelar
+                    </button>
+                    <button type="submit" class="btn">
+                        <i class="fas fa-check"></i> Confirmar Compra
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- Modal de confirmación de devolución -->
     <div class="modal" id="return-confirmation-modal">
         <div class="modal-content">
@@ -1573,50 +1867,112 @@
         </div>
     </div>
 
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>La Calle de Luna</h3>
+                    <p>Moda de calidad para toda la familia que valora el estilo, la comodidad y la durabilidad.</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-tiktok"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Calle Luna 123, Ciudad</p>
+                    <p><i class="fas fa-phone"></i> +123 456 7890</p>
+                    <p><i class="fas fa-envelope"></i> info@lacalledeluna.com</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Políticas</h3>
+                    <p><a href="#" style="color: #dfe6e9; text-decoration: none;">Términos y condiciones</a></p>
+                    <p><a href="#" style="color: #dfe6e9; text-decoration: none;">Política de privacidad</a></p>
+                    <p><a href="#" style="color: #dfe6e9; text-decoration: none;">Política de devoluciones</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 La Calle de Luna - Todos los derechos reservados</p>
+            </div>
+        </div>
+    </footer>
+
     <script>
         // Datos de productos por categoría
         const productosPorCategoria = {
             accesorios: [
-                { id: 1, name: "Collar Lunar Plateado", price: 49.99, img: "https://images.unsplash.com/photo-1591561954557-269411极速赛车开奖直播记录
+                { id: 1, name: "Collar Lunar Plateado", price: 49.99, img: "https://images.unsplash.com/photo-1591561954557-26941169b49e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" },
                 { id: 2, name: "Anillo Estrella Nocturna", price: 39.99, img: "https://images.unsplash.com/photo-1611010344444-5f9e4d86a6e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=776&q=80" },
-                { id: 3, name: "Bolso Noche Estrellada", price: 79.99, img: "极速赛车开奖直播记录
-                { id: 4, name: "Gafas de Sol Nocturnas", price: 59.99, img: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&极速赛车开奖直播记录
-                { id: 5, name: "Pulsera Constelación", price: 34.99, img: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwa90by1wYWdlfHx8f极速赛车开奖直播记录
-                { id: 6, name: "Reloj Luna Creciente", price: 89.99, img: "https://images.unsplash极速赛车开奖直播记录
+                { id: 3, name: "Bolso Noche Estrellada", price: 79.99, img: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" },
+                { id: 4, name: "Gafas de Sol Nocturnas", price: 59.99, img: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1035&q=80" },
+                { id: 5, name: "Pulsera Constelación", price: 34.99, img: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwa90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" },
+                { id: 6, name: "Reloj Luna Creciente", price: 89.99, img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=799&q=80" }
             ],
             ropa: [
                 { id: 7, name: "Vestido Noche Estrellada", price: 89.99, img: "https://images.unsplash.com/photo-1529903384028-929ae5dccdf1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" },
-                { id: 8, name: "Abrigo Luna Llena", price: 129.99, img: "https://images.unsplash.com/photo-1551028719-00167b16eac5?ixlib=rb-4.0.3&ixid=M3wxMjA3f极速赛车开奖直播记录
+                { id: 8, name: "Abrigo Luna Llena", price: 129.99, img: "https://images.unsplash.com/photo-1551028719-00167b16eac5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80" },
                 { id: 9, name: "Camiseta Eclipse", price: 39.99, img: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=580&q=80" },
                 { id: 10, name: "Falda Galaxia", price: 59.99, img: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=464&q=80" },
-                { id: 11, name: "Jeans Crepúsculo", price: 69.99, img: "https://images.unsplash.com/photo-1542272604-787c3835535极速赛车开奖直播记录
-                { id: 12, name极速赛车开奖直播记录
+                { id: 11, name: "Jeans Crepúsculo", price: 69.99, img: "https://images.unsplash.com/photo-1542272604-787c3835535d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=826&q=80" },
+                { id: 12, name: "Chaqueta Medianoche", price: 99.99, img: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=436&q=80" }
             ],
             calzado: [
-                { id: 13, name: "Botas Luna Nueva", price: 119.99, img: "https://images.unsplash.com/photo-1608256246200-53e635b5b65f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fH极速赛车开奖直播记录
+                { id: 13, name: "Botas Luna Nueva", price: 119.99, img: "https://images.unsplash.com/photo-1608256246200-53e635b5b65f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=c crop&w=870&q=80" },
                 { id: 14, name: "Zapatos Estrella Fugaz", price: 89.99, img: "https://images.unsplash.com/photo-1560343090-f0409e92791a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=464&q=80" },
                 { id: 15, name: "Sandalias Atardecer", price: 59.99, img: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=580&q=80" },
                 { id: 16, name: "Deportivas Cielo Nocturno", price: 79.99, img: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=464&q=80" },
-                { id: 17, name: "Zapatillas Aurora Boreal", price: 69.99, img: "https://images.unsplash.com/photo-1595950653106-6极速赛车开奖直播记录
+                { id: 17, name: "Zapatillas Aurora Boreal", price: 69.99, img: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80" },
                 { id: 18, name: "Botines Eclipse Solar", price: 99.99, img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80" }
             ],
             colecciones: [
-                { id: 19, name: "Conjunto Edición Limitada Luna", price: 199.99, img: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8极速赛车开奖直播记录
-                { id: 20, name: "Colección Firmada Constelaciones", price极速赛车开奖直播记录
-                { id: 21, name: "Pack Premium Galaxia", price: 249.99, img: "https://images.unsplash.com/极速赛车开奖直播记录
+                { id: 19, name: "Conjunto Edición Limitada Luna", price: 199.99, img: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80" },
+                { id: 20, name: "Colección Firmada Constelaciones", price: 299.99, img: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80" },
+                { id: 21, name: "Pack Premium Galaxia", price: 249.99, img: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" },
                 { id: 22, name: "Set Exclusivo Vía Láctea", price: 179.99, img: "https://images.unsplash.com/photo-1588099768531-a72d4a198538?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80" },
                 { id: 23, name: "Pack Estelar Nocturno", price: 159.99, img: "https://images.unsplash.com/photo-1591369822096-ffd140ec948a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80" },
-                { id: 24, name: "Colección Aniversario Luna", price: 349.99, img: "https://images.unsplash.com/photo-1556906781-2f0520405b71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlf极速赛车开奖直播记录
+                { id: 24, name: "Colección Aniversario Luna", price: 349.99, img: "https://images.unsplash.com/photo-1556906781-2f0520405b71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80" }
             ]
         };
 
-        // Almacenamiento de pedidos
-        let orders = JSON.parse(localStorage.getItem('orders')) || [];
-        let orderIdCounter = orders.length > 0 ? Math.max(...orders.map(o => o.id)) + 1 : 1000;
-        
-        // Almacenamiento de carrito
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        let itemCount = cart.reduce((total, item) => total + item.quantity, 0);
+        // Datos de ejemplo para devoluciones
+        const devolucionesEjemplo = [
+            {
+                id: "DEV-0001",
+                cliente: "María González",
+                email: "maria.gonzalez@email.com",
+                productos: "Vestido Noche Estrellada (Talla M)",
+                monto: 89.99,
+                estado: "pending",
+                fecha: "2023-10-15"
+            },
+            {
+                id: "DEV-0002",
+                cliente: "Carlos Rodríguez",
+                email: "carlos.rodriguez@email.com",
+                productos: "Zapatos Estrella Fugaz (Talla 42), Cinturón Lunar",
+                monto: 134.98,
+                estado: "approved",
+                fecha: "2023-10-10"
+            },
+            {
+                id: "DEV-0003",
+                cliente: "Ana Martínez",
+                email: "ana.martinez@email.com",
+                productos: "Bolso Noche Estrellada",
+                monto: 79.99,
+                estado: "rejected",
+                fecha: "2023-10-05"
+            }
+        ];
+
+        // Almacenamiento de devoluciones
+        let devoluciones = JSON.parse(localStorage.getItem('devoluciones')) || devolucionesEjemplo;
+        let nextReturnId = 1004; // Para generar nuevos IDs
 
         document.addEventListener('DOMContentLoaded', function() {
             const cartCount = document.querySelector('.cart-count');
@@ -1630,65 +1986,256 @@
             const cartTotal = document.getElementById('cart-total');
             const checkoutBtn = document.getElementById('checkout-btn');
             const categoryItems = document.querySelectorAll('.category-item');
+            const seasonItems = document.querySelectorAll('.season-item');
             const productsSection = document.getElementById('products-section');
+            const seasonsSection = document.getElementById('seasons-section');
             const cartSection = document.getElementById('cart-section');
             const ordersSection = document.getElementById('orders-section');
+            const supportSection = document.getElementById('support-section');
+            const returnsSection = document.getElementById('returns-section');
             const viewCartFeature = document.getElementById('view-cart-feature');
             const securePaymentFeature = document.getElementById('secure-payment-feature');
+            const supportFeature = document.getElementById('support-feature');
+            const returnsFeature = document.getElementById('returns-feature');
             const headerCart = document.getElementById('header-cart');
             const backToShopping = document.getElementById('back-to-shopping');
+            const backToFeaturesFromOrders = document.getElementById('back-to-features-from-orders');
+            const backToFeaturesFromSupport = document.getElementById('back-to-features-from-support');
+            const backToCatalog = document.getElementById('back-to-catalog');
+            const ordersList = document.getElementById('orders-list');
             const ordersTable = document.getElementById('orders-table');
             const ordersTableBody = document.getElementById('orders-table-body');
-            const orderEmpty = document.getElementById('order-empty');
-            const paymentModal = document.getElementById('payment-modal');
-            const customerForm = document.getElementById('customer-form');
-            const cancelPaymentBtn = document.getElementById('cancel-payment-btn');
+            const ordersEmpty = document.getElementById('orders-empty');
+            const supportForm = document.getElementById('support-form');
+            const returnsForm = document.getElementById('returns-form');
+            const returnsBtn = document.getElementById('returns-btn');
+            const dropdownItems = document.querySelectorAll('.dropdown-item');
             const confirmationModal = document.getElementById('confirmation-modal');
+            const customerModal = document.getElementById('customer-modal');
+            const customerForm = document.getElementById('customer-form');
+            const cancelPurchaseBtn = document.getElementById('cancel-purchase-btn');
+            const returnConfirmationModal = document.getElementById('return-confirmation-modal');
             const continueShoppingBtn = document.getElementById('continue-shopping-btn');
             const viewOrdersBtn = document.getElementById('view-orders-btn');
+            const returnModalCloseBtn = document.getElementById('return-modal-close-btn');
+            const returnsTabs = document.querySelectorAll('.returns-tab');
+            const returnsContents = document.querySelectorAll('.returns-content');
+            const returnsTableBody = document.getElementById('returns-table-body');
+            const returnsEmpty = document.getElementById('returns-empty');
+            const returnsTable = document.getElementById('returns-table');
+            const navInicio = document.getElementById('nav-inicio');
+            const logoHome = document.getElementById('logo-home');
+            const seasonCards = document.querySelectorAll('.season-card');
             
-            // Inicializar
-            updateCart();
-            renderCartItems();
-            renderOrders();
+            let cart = [];
+            let itemCount = 0;
+            let orders = JSON.parse(localStorage.getItem('orders')) || [];
+            let orderIdCounter = orders.length > 0 ? Math.max(...orders.map(o => o.id)) + 1 : 1000;
             
             // Función para mostrar/ocultar secciones
             function showSection(sectionToShow) {
-                document.querySelectorAll('.products-section, .cart-section, .orders-section').forEach(section => {
+                // Ocultar todas las secciones principales
+                document.querySelectorAll('.categories, .products-section, .seasons-section, .cart-section, #collections, .orders-section, .support-section, .returns-section').forEach(section => {
                     section.style.display = 'none';
                 });
                 
+                // Mostrar la sección solicitada
                 if (sectionToShow) {
                     sectionToShow.style.display = 'block';
+                    sectionToShow.classList.add('active');
+                    
+                    // Desplazarse suavemente a la sección
+                    window.scrollTo({
+                        top: sectionToShow.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
                 }
+            }
+            
+            // Función para regresar al inicio
+            function goToHome() {
+                // Ocultar todas las secciones
+                document.querySelectorAll('.products-section, .seasons-section, .cart-section, #collections, .orders-section, .support-section, .returns-section').forEach(section => {
+                    section.style.display = 'none';
+                });
+                
+                // Mostrar secciones principales
+                document.querySelector('.categories').style.display = 'block';
+                document.getElementById('features').style.display = 'block';
+                document.getElementById('collections').style.display = 'block';
+                
+                // Desplazarse al inicio
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
+            
+            // Función para cambiar entre pestañas de devoluciones
+            function changeTab(tabName) {
+                // Actualizar pestañas activas
+                returnsTabs.forEach(tab => {
+                    if (tab.getAttribute('data-tab') === tabName) {
+                        tab.classList.add('active');
+                    } else {
+                        tab.classList.remove('active');
+                    }
+                });
+                
+                // Actualizar contenido visible
+                returnsContents.forEach(content => {
+                    if (content.id === `${tabName}-tab`) {
+                        content.classList.add('active');
+                    } else {
+                        content.classList.remove('active');
+                    }
+                });
+                
+                // Si es la pestaña de listado, cargar las devoluciones
+                if (tabName === 'list') {
+                    renderReturnsList();
+                }
+            }
+            
+            // Función para renderizar la lista de devoluciones
+            function renderReturnsList() {
+                returnsTableBody.innerHTML = '';
+                
+                if (devoluciones.length === 0) {
+                    returnsEmpty.classList.add('active');
+                    returnsTable.classList.remove('active');
+                    return;
+                }
+                
+                returnsEmpty.classList.remove('active');
+                returnsTable.classList.add('active');
+                
+                devoluciones.forEach(dev => {
+                    const row = document.createElement('tr');
+                    
+                    // Determinar la clase de estado
+                    let statusClass = '';
+                    let statusText = '';
+                    
+                    switch(dev.estado) {
+                        case 'pending':
+                            statusClass = 'status-pending';
+                            statusText = 'Pendiente';
+                            break;
+                        case 'approved':
+                            statusClass = 'status-approved';
+                            statusText = 'Aprobada';
+                            break;
+                        case 'rejected':
+                            statusClass = 'status-rejected';
+                            statusText = 'Rechazada';
+                            break;
+                    }
+                    
+                    row.innerHTML = `
+                        <td>${dev.id}</td>
+                        <td>${dev.cliente}</td>
+                        <td>${dev.email}</td>
+                        <td>${dev.productos}</td>
+                        <td>$${dev.monto.toFixed(2)}</td>
+                        <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+                        <td>${dev.fecha}</td>
+                    `;
+                    
+                    returnsTableBody.appendChild(row);
+                });
+            }
+            
+            // Función para guardar devoluciones en localStorage
+            function saveReturns() {
+                localStorage.setItem('devoluciones', JSON.stringify(devoluciones));
+            }
+            
+            // Función para guardar pedidos en localStorage
+            function saveOrders() {
+                localStorage.setItem('orders', JSON.stringify(orders));
+            }
+            
+            // Función para renderizar productos por categoría
+            function renderProducts(category) {
+                const products = productosPorCategoria[category] || [];
+                categoryTitle.textContent = `Productos de ${category.charAt(0).toUpperCase() + category.slice(1)}`;
+                
+                productsContainer.innerHTML = '';
+                
+                if (products.length === 0) {
+                    productsContainer.innerHTML = '<p class="text-center">No hay productos en esta categoría.</p>';
+                    return;
+                }
+                
+                products.forEach(product => {
+                    const productElement = document.createElement('div');
+                    productElement.className = 'product';
+                    productElement.innerHTML = `
+                        <div class="product-img">
+                            <img src="${product.img}" alt="${product.name}">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">${product.name}</h3>
+                            <p class="product-price">$${product.price.toFixed(2)}</p>
+                            <button class="btn btn-sm add-to-cart" data-id="${product.id}" data-name="${product.name}" data-price="${product.price}" data-img="${product.img}">
+                                <i class="fas fa-cart-plus"></i> Añadir al Carrito
+                            </button>
+                        </div>
+                    `;
+                    
+                    productsContainer.appendChild(productElement);
+                });
+                
+                // Añadir event listeners a los nuevos botones
+                document.querySelectorAll('.add-to-cart').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const id = this.getAttribute('data-id');
+                        const name = this.getAttribute('data-name');
+                        const price = this.getAttribute('data-price');
+                        const img = this.getAttribute('data-img');
+                        
+                        addToCart(id, name, price, img);
+                        
+                        // Animation for feedback
+                        this.innerHTML = '<i class="fas fa-check"></i> Añadido';
+                        this.style.backgroundColor = '#27ae60';
+                        
+                        setTimeout(() => {
+                            this.innerHTML = '<i class="fas fa-cart-plus"></i> Añadir al Carrito';
+                            this.style.backgroundColor = '';
+                        }, 1500);
+                    });
+                });
             }
             
             // Función para actualizar el carrito
             function updateCart() {
+                // Actualizar contador
                 cartCount.textContent = itemCount;
                 
+                // Mostrar/ocultar mensaje de carrito vacío
                 if (cart.length === 0) {
                     cartEmpty.classList.add('active');
-                    cartSummary.style.display = 'none';
+                    cartSummary.classList.remove('active');
                 } else {
                     cartEmpty.classList.remove('active');
-                    cartSummary.style.display = 'block';
-                    
-                    let subtotal = 0;
-                    cart.forEach(item => {
-                        subtotal += item.price * item.quantity;
-                    });
-                    
-                    const shipping = subtotal > 99 ? 0 : 15;
-                    const total = subtotal + shipping;
-                    
-                    cartSubtotal.textContent = `$${subtotal.toFixed(2)}`;
-                    cartShipping.textContent = shipping === 0 ? 'Gratis' : `$${shipping.toFixed(2)}`;
-                    cartTotal.textContent = `$${total.toFixed(2)}`;
+                    cartSummary.classList.add('active');
                 }
                 
-                // Guardar en localStorage
-                localStorage.setItem('cart', JSON.stringify(cart));
+                // Calcular totales
+                let subtotal = 0;
+                cart.forEach(item => {
+                    subtotal += item.price * item.quantity;
+                });
+                
+                const shipping = subtotal > 99 ? 0 : 15;
+                const total = subtotal + shipping;
+                
+                // Actualizar totales
+                cartSubtotal.textContent = `$${subtotal.toFixed(2)}`;
+                cartShipping.textContent = shipping === 0 ? 'Gratis' : `$${shipping.toFixed(2)}`;
+                cartTotal.textContent = `$${total.toFixed(2)}`;
             }
             
             // Función para renderizar los items del carrito
@@ -1696,9 +2243,11 @@
                 cartItemsContainer.innerHTML = '';
                 
                 if (cart.length === 0) {
-                    cartItemsContainer.appendChild(cartEmpty);
+                    cartEmpty.classList.add('active');
                     return;
                 }
+                
+                cartEmpty.classList.remove('active');
                 
                 cart.forEach(item => {
                     const cartItem = document.createElement('div');
@@ -1728,7 +2277,7 @@
                     cartItemsContainer.appendChild(cartItem);
                 });
                 
-                // Añadir event listeners
+                // Añadir event listeners a los botones de cantidad y eliminar
                 document.querySelectorAll('.decrease-btn').forEach(btn => {
                     btn.addEventListener('click', function() {
                         const id = this.getAttribute('data-id');
@@ -1751,7 +2300,7 @@
                     });
                 });
                 
-                document.querySelectorAll('.remove-item').forEach(btn极速赛车开奖直播记录
+                document.querySelectorAll('.remove-item').forEach(btn => {
                     btn.addEventListener('click', function() {
                         const id = this.getAttribute('data-id');
                         removeFromCart(id);
@@ -1764,29 +2313,47 @@
                 ordersTableBody.innerHTML = '';
                 
                 if (orders.length === 0) {
-                    orderEmpty.classList.add('active');
-                    ordersTable.classList.remove('active');
+                    ordersEmpty.style.display = 'block';
+                    ordersTable.style.display = 'none';
                     return;
                 }
                 
-                orderEmpty.classList.remove('active');
-                ordersTable.classList.add('active');
+                ordersEmpty.style.display = 'none';
+                ordersTable.style.display = 'table';
                 
                 orders.forEach(order => {
                     const row = document.createElement('tr');
                     
                     // Determinar la clase de estado
-                    let statusClass = 'status-pending';
-                    let statusText = 'Pendiente';
+                    let statusClass = '';
+                    let statusText = '';
+                    
+                    switch(order.estado) {
+                        case 'pending':
+                            statusClass = 'status-pending';
+                            statusText = 'Pendiente';
+                            break;
+                        case 'completed':
+                            statusClass = 'status-approved';
+                            statusText = 'Completado';
+                            break;
+                        case 'cancelled':
+                            statusClass = 'status-rejected';
+                            statusText = 'Cancelado';
+                            break;
+                    }
+                    
+                    // Crear lista de productos
+                    const productosList = order.items.map(item => `${item.name} x${item.quantity}`).join(', ');
                     
                     row.innerHTML = `
                         <td>#${order.id}</td>
-                        <td>${order.customerName}</td>
-                        <td>${order.customerEmail}</td>
-                        <td>${order.items.length} producto(s)</td>
+                        <td>${order.cliente}</td>
+                        <td>${order.email}</td>
+                        <td>${productosList}</td>
                         <td>$${order.total.toFixed(2)}</td>
-                        <td><span class="status-badge ${statusClass}">${statusText}</span></td>
-                        <td>${order.date}</td>
+                        <td><span class="order-status ${statusClass}">${statusText}</span></td>
+                        <td>${order.fecha}</td>
                     `;
                     
                     ordersTableBody.appendChild(row);
@@ -1812,6 +2379,25 @@
                 itemCount += 1;
                 updateCart();
                 renderCartItems();
+                
+                // Mostrar mensaje de confirmación
+                const confirmation = document.createElement('div');
+                confirmation.textContent = '¡Producto añadido al carrito!';
+                confirmation.style.position = 'fixed';
+                confirmation.style.top = '100px';
+                confirmation.style.right = '20px';
+                confirmation.style.background = 'var(--success)';
+                confirmation.style.color = 'white';
+                confirmation.style.padding = '10px 20px';
+                confirmation.style.borderRadius = '5px';
+                confirmation.style.zIndex = '1000';
+                confirmation.style.boxShadow = '0 4px 10px rgba(0,0,0,0.3)';
+                document.body.appendChild(confirmation);
+                
+                // Eliminar mensaje después de 2 segundos
+                setTimeout(() => {
+                    confirmation.remove();
+                }, 2000);
             }
             
             // Función para disminuir cantidad
@@ -1863,18 +2449,18 @@
             }
             
             // Función para finalizar compra
-            function processCheckout() {
+            function checkout() {
                 if (cart.length === 0) {
                     alert('Tu carrito está vacío. Agrega algunos productos antes de finalizar la compra.');
                     return;
                 }
                 
-                // Mostrar modal de pago
-                paymentModal.classList.add('active');
+                // Mostrar modal para datos del cliente
+                customerModal.classList.add('active');
             }
             
-            // Función para confirmar compra
-            function confirmPurchase(customerName, customerEmail) {
+            // Función para procesar el pago con los datos del cliente
+            function processPayment(customerName, customerEmail) {
                 // Calcular total
                 let subtotal = 0;
                 cart.forEach(item => {
@@ -1886,21 +2472,21 @@
                 // Crear nuevo pedido
                 const newOrder = {
                     id: orderIdCounter++,
-                    customerName,
-                    customerEmail,
-                    date: new Date().toLocaleDateString('es-ES'),
+                    cliente: customerName,
+                    email: customerEmail,
                     items: [...cart],
                     subtotal,
                     shipping,
                     total,
-                    status: 'pending'
+                    estado: 'pending',
+                    fecha: new Date().toLocaleDateString('es-ES')
                 };
                 
                 // Añadir a la lista de pedidos
                 orders.unshift(newOrder);
                 
                 // Guardar en localStorage
-                localStorage.setItem('orders', JSON.stringify(orders));
+                saveOrders();
                 
                 // Mostrar modal de confirmación
                 confirmationModal.classList.add('active');
@@ -1910,13 +2496,18 @@
                 itemCount = 0;
                 updateCart();
                 renderCartItems();
+                
+                // Actualizar lista de pedidos
                 renderOrders();
             }
             
-            // Mostrar productos al hacer clic en categorías
+            // Mostrar/ocultar productos al hacer clic en categorías
             categoryItems.forEach(item => {
                 item.addEventListener('click', function() {
+                    // Remover clase active de todos los items
                     categoryItems.forEach(i => i.classList.remove('active'));
+                    
+                    // Añadir clase active al item clickeado
                     this.classList.add('active');
                     
                     const category = this.getAttribute('data-category');
@@ -1925,94 +2516,214 @@
                 });
             });
             
-            // Función para renderizar productos
-            function renderProducts(category) {
-                const products = productosPorCategoria[category] || [];
-                categoryTitle.textContent = `Productos de ${category.charAt(0).toUpperCase() + category.slice(1)}`;
-                
-                productsContainer.innerHTML = '';
-                
-                products.forEach(product => {
-                    const productElement = document.createElement('div');
-                    productElement.className = 'product';
-                    productElement.innerHTML = `
-                        <div class极速赛车开奖直播记录
-                            <img src="${product.img}" alt="${product.name}">
-                        </div>
-                        <div class="product-info">
-                            <h3 class="product-title">${product.name}</h3>
-                            <p class="product-price">$${product.price.toFixed(2)}</p>
-                            <button class="btn btn-sm add-to-cart" data-id="${product.id}" data-name="${product.name}" data-price="${product.price}" data-img="${product.img}">
-                                <i class="fas fa-cart-plus"></i> Añadir al Carrito
-                            </button>
-                        </div>
-                    `;
+            // Mostrar temporadas al hacer clic en items de temporada
+            seasonItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // Remover clase active de todos los items
+                    seasonItems.forEach(i => i.classList.remove('active'));
                     
-                    productsContainer.appendChild(productElement);
+                    // Añadir clase active al item clickeado
+                    this.classList.add('active');
+                    
+                    const season = this.getAttribute('data-season');
+                    // Aquí puedes implementar la lógica para mostrar productos de temporada
+                    alert(`Mostrando productos de la temporada: ${season}`);
                 });
-                
-                // Añadir event listeners a los botones
-                document.querySelectorAll('.add-to-cart').forEach(button => {
-                    button.addEventListener('click', function() {
-                        const id = this.getAttribute('data-id');
-                        const name = this.getAttribute('data-name');
-                        const price = this.getAttribute('data-price');
-                        const img = this.getAttribute('data-img');
-                        
-                        addToCart(id, name, price, img);
-                    });
-                });
-            }
+            });
             
-            // Event listeners
+            // Mostrar categorías desde el menú desplegable
+            dropdownItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const category = this.getAttribute('data-category');
+                    const season = this.getAttribute('data-season');
+                    
+                    if (category) {
+                        // Remover clase active de todos los items
+                        categoryItems.forEach(i => i.classList.remove('active'));
+                        
+                        // Añadir clase active al item correspondiente
+                        document.querySelector(`.category-item[data-category="${category}"]`).classList.add('active');
+                        
+                        renderProducts(category);
+                        showSection(productsSection);
+                    } else if (season) {
+                        // Remover clase active de todos los items
+                        seasonItems.forEach(i => i.classList.remove('active'));
+                        
+                        // Añadir clase active al item correspondiente
+                        document.querySelector(`.season-item[data-season="${season}"]`).classList.add('active');
+                        
+                        // Aquí puedes implementar la lógica para mostrar productos de temporada
+                        alert(`Mostrando productos de la temporada: ${season}`);
+                    }
+                });
+            });
+            
+            // Mostrar sección de devoluciones
+            returnsBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                showSection(returnsSection);
+            });
+            
+            // Mostrar carrito al hacer clic en "Productos al Carrito"
             viewCartFeature.addEventListener('click', function() {
                 showSection(cartSection);
             });
             
+            // Mostrar pedidos al hacer clic en "Pago Seguro"
             securePaymentFeature.addEventListener('click', function() {
                 renderOrders();
                 showSection(ordersSection);
             });
             
-            headerCart.addEventListener('click', function() {
+            // Mostrar soporte al hacer clic en "Soporte 24/7"
+            supportFeature.addEventListener('click', function() {
+                showSection(supportSection);
+            });
+            
+            // Mostrar devoluciones al hacer clic en "Devoluciones"
+            returnsFeature.addEventListener('click', function() {
+                showSection(returnsSection);
+            });
+            
+            // Mostrar carrito al hacer clic en el icono del carrito
+            headerCart.addEventListener('click', function(e) {
+                e.preventDefault();
                 showSection(cartSection);
             });
             
+            // Volver a comprar desde el carrito
             backToShopping.addEventListener('click', function(e) {
                 e.preventDefault();
-                showSection(document.querySelector('.categories'));
+                goToHome();
             });
             
-            checkoutBtn.addEventListener('click', function() {
-                processCheckout();
+            // Volver a características desde pedidos
+            backToFeaturesFromOrders.addEventListener('click', function(e) {
+                e.preventDefault();
+                goToHome();
             });
             
+            // Volver a características desde soporte
+            backToFeaturesFromSupport.addEventListener('click', function(e) {
+                e.preventDefault();
+                goToHome();
+            });
+            
+            // Volver al catálogo desde devoluciones
+            backToCatalog.addEventListener('click', function(e) {
+                e.preventDefault();
+                goToHome();
+            });
+            
+            // Ir al inicio desde el logo o enlace de inicio
+            logoHome.addEventListener('click', function(e) {
+                e.preventDefault();
+                goToHome();
+            });
+            
+            navInicio.addEventListener('click', function(e) {
+                e.preventDefault();
+                goToHome();
+            });
+            
+            // Enviar formulario de soporte
+            supportForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Solicitud de soporte enviada correctamente. Nos pondremos en contacto contigo pronto.');
+                supportForm.reset();
+                goToHome();
+            });
+            
+            // Enviar formulario de devoluciones
+            returnsForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Crear nueva devolución
+                const newReturn = {
+                    id: `DEV-${nextReturnId.toString().padStart(4, '0')}`,
+                    cliente: document.getElementById('return-name').value,
+                    email: document.getElementById('return-email').value,
+                    productos: document.getElementById('return-products').value,
+                    monto: parseFloat(document.getElementById('return-amount').value),
+                    estado: 'pending',
+                    fecha: new Date().toISOString().split('T')[0]
+                };
+                
+                // Agregar a la lista
+                devoluciones.unshift(newReturn);
+                nextReturnId++;
+                
+                // Guardar en localStorage
+                saveReturns();
+                
+                // Mostrar modal de confirmación
+                returnConfirmationModal.classList.add('active');
+                
+                // Reiniciar formulario
+                returnsForm.reset();
+            });
+            
+            // Procesar pago con datos del cliente
             customerForm.addEventListener('submit', function(e) {
                 e.preventDefault();
+                
                 const customerName = document.getElementById('customer-name').value;
                 const customerEmail = document.getElementById('customer-email').value;
                 
-                paymentModal.classList.remove('active');
-                confirmPurchase(customerName, customerEmail);
+                // Cerrar modal de cliente
+                customerModal.classList.remove('active');
+                
+                // Procesar pago
+                processPayment(customerName, customerEmail);
             });
             
-            cancelPaymentBtn.addEventListener('click', function() {
-                paymentModal.classList.remove('active');
+            // Cancelar compra
+            cancelPurchaseBtn.addEventListener('click', function() {
+                customerModal.classList.remove('active');
             });
             
+            // Cambiar entre pestañas de devoluciones
+            returnsTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabName = this.getAttribute('data-tab');
+                    changeTab(tabName);
+                });
+            });
+            
+            // Proceder al pago
+            checkoutBtn.addEventListener('click', function() {
+                checkout();
+            });
+            
+            // Continuar comprando desde el modal
             continueShoppingBtn.addEventListener('click', function() {
                 confirmationModal.classList.remove('active');
-                showSection(document.querySelector('.categories'));
+                goToHome();
             });
             
+            // Ver pedidos desde el modal
             viewOrdersBtn.addEventListener('click', function() {
                 confirmationModal.classList.remove('active');
                 renderOrders();
                 showSection(ordersSection);
             });
             
-            // Inicialmente mostrar categorías
-            showSection(document.querySelector('.categories'));
+            // Cerrar modal de devolución
+            returnModalCloseBtn.addEventListener('click', function() {
+                returnConfirmationModal.classList.remove('active');
+                goToHome();
+            });
+            
+            // Inicializar carrito y pedidos
+            updateCart();
+            renderCartItems();
+            renderOrders();
+            
+            // Inicialmente mostrar secciones principales
+            goToHome();
         });
     </script>
 </body>
