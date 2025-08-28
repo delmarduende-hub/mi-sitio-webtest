@@ -1282,7 +1282,6 @@
             justify-content: center;
             text-decoration: none;
             transition: all 0.3s;
-            cursor: pointer;
         }
         
         .social-icon:hover {
@@ -1385,6 +1384,15 @@
             color: var(--light);
         }
         
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-right: 15px;
+            color: var(--accent);
+            font-weight: bold;
+        }
+        
         /* Responsive */
         @media (max-width: 768px) {
             .header-content {
@@ -1477,12 +1485,38 @@
             .modal-buttons {
                 flex-direction: column;
             }
+            
+            .user-info {
+                flex-direction: column;
+                margin: 10px 0;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Modal de Bienvenida -->
+    <div class="modal active" id="welcome-modal">
+        <div class="modal-content">
+            <h3>¡Bienvenido a La Calle de Luna!</h3>
+            <p>Por favor, ingresa tus datos para continuar</p>
+            <form id="welcome-form">
+                <div class="form-group">
+                    <label for="user-name">Nombre completo *</label>
+                    <input type="text" id="user-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="user-email">Correo electrónico *</label>
+                    <input type="email" id="user-email" required>
+                </div>
+                <div class="modal-buttons">
+                    <button type="submit" class="btn">Continuar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- Header -->
-    <header>
+    <header style="display: none;">
         <div class="container header-content">
             <div class="logo" id="logo-home">
                 <i class="fas fa-moon"></i>
@@ -1524,13 +1558,16 @@
                         <a href="#" id="admin-login-btn" class="admin-login-btn">Admin</a>
                         <a href="#" id="admin-logout-btn" class="admin-only">Cerrar Sesión</a>
                     </li>
+                    <li>
+                        <a href="#" id="change-user-data">Cambiar datos</a>
+                    </li>
                 </ul>
             </nav>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" style="display: none;">
         <div class="container hero-content">
             <h1>Bienvenidos a "La Calle de Luna"</h1>
             <p>"Donde la moda se encuentra con la magia de la noche"</p>
@@ -1539,7 +1576,7 @@
     </section>
 
     <!-- Features -->
-    <div class="container" id="features">
+    <div class="container" id="features" style="display: none;">
         <div class="features">
             <div class="feature" id="view-cart-feature">
                 <i class="fas fa-shopping-cart"></i>
@@ -1565,7 +1602,7 @@
     </div>
 
     <!-- Categorías -->
-    <section class="categories" id="categories">
+    <section class="categories" id="categories" style="display: none;">
         <div class="container">
             <h2>Nuestras Categorías</h2>
             <div class="category-list">
@@ -1588,7 +1625,7 @@
     </section>
 
     <!-- Sección de Temporadas -->
-    <section class="seasons-section" id="seasons-section">
+    <section class="seasons-section" id="seasons-section" style="display: none;">
         <div class="container">
             <h2>Nuestras Temporadas</h2>
             <div class="season-list">
@@ -1841,7 +1878,7 @@
     </section>
 
     <!-- Colecciones por temporada -->
-    <section class="container" id="collections">
+    <section class="container" id="collections" style="display: none;">
         <h2 class="section-title">Nuestras Colecciones por Temporada</h2>
         <div class="season-grid">
             <div class="season-card" data-season="verano">
@@ -1956,7 +1993,7 @@
     </div>
 
     <!-- Footer -->
-    <footer>
+    <footer style="display: none;">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
@@ -1999,7 +2036,7 @@
                 { id: 3, name: "Bolso Noche Estrellada", price: 79.99, img: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" },
                 { id: 4, name: "Gafas de Sol Nocturnas", price: 59.99, img: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1035&q=80" },
                 { id: 5, name: "Pulsera Constelación", price: 34.99, img: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwa90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" },
-                { id: 6, name: "Reloj Luna Creciente", price: 89.99, img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=799&q=80" }
+                { id: 6, name: "Reloj Luna Creciente", price: 89.99, img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=c crop&w=799&q=80" }
             ],
             ropa: [
                 { id: 7, name: "Vestido Noche Estrellada", price: 89.99, img: "https://images.unsplash.com/photo-1529903384028-929ae5dccdf1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" },
@@ -2014,7 +2051,7 @@
                 { id: 14, name: "Zapatos Estrella Fugaz", price: 89.99, img: "https://images.unsplash.com/photo-1560343090-f0409e92791a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=464&q=80" },
                 { id: 15, name: "Sandalias Atardecer", price: 59.99, img: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=580&q=80" },
                 { id: 16, name: "Deportivas Cielo Nocturno", price: 79.99, img: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=464&q=80" },
-                { id: 17, name: "Zapatillas Aurora Boreal", price: 69.99, img: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=c crop&w=387&q=80" },
+                { id: 17, name: "Zapatillas Aurora Boreal", price: 69.99, img: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80" },
                 { id: 18, name: "Botines Eclipse Solar", price: 99.99, img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80" }
             ],
             colecciones: [
@@ -2168,12 +2205,16 @@
             const adminLogoutBtn = document.getElementById('admin-logout-btn');
             const adminPanelBtn = document.getElementById('admin-panel-btn');
             const filterInputs = document.querySelectorAll('.filter-input');
+            const welcomeModal = document.getElementById('welcome-modal');
+            const welcomeForm = document.getElementById('welcome-form');
+            const changeUserDataBtn = document.getElementById('change-user-data');
 
             let cart = [];
             let itemCount = 0;
             let orders = JSON.parse(localStorage.getItem('orders')) || pedidosEjemplo;
             let orderIdCounter = orders.length > 0 ? Math.max(...orders.map(o => o.id)) + 1 : 1000;
             let isAdmin = localStorage.getItem('isAdmin') === 'true';
+            let userData = JSON.parse(localStorage.getItem('userData')) || null;
 
             // Función para actualizar la interfaz según el rol
             function updateUIForAdmin() {
@@ -2187,8 +2228,40 @@
                 renderReturnsList();
             }
 
-            // Inicializar la UI para admin
+            // Función para mostrar/ocultar contenido según autenticación
+            function toggleContentVisibility() {
+                if (userData) {
+                    // Ocultar modal de bienvenida
+                    welcomeModal.classList.remove('active');
+                    // Mostrar contenido principal
+                    document.querySelector('header').style.display = 'block';
+                    document.querySelector('.hero').style.display = 'block';
+                    document.getElementById('features').style.display = 'block';
+                    document.getElementById('categories').style.display = 'block';
+                    document.getElementById('collections').style.display = 'block';
+                    document.querySelector('footer').style.display = 'block';
+                    
+                    // Rellenar formularios con datos de usuario
+                    document.getElementById('support-name').value = userData.name;
+                    document.getElementById('support-email').value = userData.email;
+                    document.getElementById('return-name').value = userData.name;
+                    document.getElementById('return-email').value = userData.email;
+                } else {
+                    // Mostrar modal de bienvenida
+                    welcomeModal.classList.add('active');
+                    // Ocultar contenido principal
+                    document.querySelector('header').style.display = 'none';
+                    document.querySelector('.hero').style.display = 'none';
+                    document.getElementById('features').style.display = 'none';
+                    document.getElementById('categories').style.display = 'none';
+                    document.getElementById('collections').style.display = 'none';
+                    document.querySelector('footer').style.display = 'none';
+                }
+            }
+
+            // Inicializar la UI para admin y usuario
             updateUIForAdmin();
+            toggleContentVisibility();
 
             // Event listeners para admin
             adminLoginBtn.addEventListener('click', function(e) {
@@ -2221,6 +2294,29 @@
                 } else {
                     alert('Credenciales incorrectas');
                 }
+            });
+
+            // Formulario de bienvenida
+            welcomeForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const userName = document.getElementById('user-name').value;
+                const userEmail = document.getElementById('user-email').value;
+                
+                userData = {
+                    name: userName,
+                    email: userEmail
+                };
+                
+                localStorage.setItem('userData', JSON.stringify(userData));
+                toggleContentVisibility();
+            });
+
+            // Cambiar datos de usuario
+            changeUserDataBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                userData = null;
+                localStorage.removeItem('userData');
+                toggleContentVisibility();
             });
 
             // Funcionalidad de filtrado
@@ -2738,6 +2834,12 @@
                     return;
                 }
                 
+                // Rellenar automáticamente con datos del usuario
+                if (userData) {
+                    document.getElementById('customer-name').value = userData.name;
+                    document.getElementById('customer-email').value = userData.email;
+                }
+                
                 // Mostrar modal para datos del cliente
                 customerModal.classList.add('active');
             }
@@ -2917,6 +3019,13 @@
                 e.preventDefault();
                 alert('Solicitud de soporte enviada correctamente. Nos pondremos en contacto contigo pronto.');
                 supportForm.reset();
+                
+                // Restaurar datos del usuario
+                if (userData) {
+                    document.getElementById('support-name').value = userData.name;
+                    document.getElementById('support-email').value = userData.email;
+                }
+                
                 goToHome();
             });
             
@@ -2945,8 +3054,12 @@
                 // Mostrar modal de confirmación
                 returnConfirmationModal.classList.add('active');
                 
-                // Reiniciar formulario
+                // Reiniciar formulario pero mantener datos de usuario
                 returnsForm.reset();
+                if (userData) {
+                    document.getElementById('return-name').value = userData.name;
+                    document.getElementById('return-email').value = userData.email;
+                }
             });
             
             // Procesar pago con datos del cliente
@@ -3005,8 +3118,10 @@
             renderCartItems();
             renderOrders();
             
-            // Inicialmente mostrar secciones principales
-            goToHome();
+            // Inicialmente mostrar secciones principales si hay datos de usuario
+            if (userData) {
+                goToHome();
+            }
         });
     </script>
 </body>
